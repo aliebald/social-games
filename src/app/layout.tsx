@@ -1,10 +1,12 @@
-import type { Metadata } from 'next';
-import '@fontsource/inter';
-import './globals.css';
+import type { Metadata } from "next";
+import "@fontsource/inter";
+import "./globals.css";
+import CssBaseline from "@mui/joy/CssBaseline";
+import { CssVarsProvider } from "@mui/joy/styles";
 
 export const metadata: Metadata = {
-  title: 'Games Finder',
-  description: 'Games Finder - working title',
+  title: "Games Finder",
+  description: "Games Finder - working title",
 };
 
 interface RootLayoutProps {
@@ -14,7 +16,12 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <CssVarsProvider>
+          <CssBaseline />
+          {children}
+        </CssVarsProvider>
+      </body>
     </html>
   );
 }
