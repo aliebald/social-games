@@ -5,6 +5,7 @@
     var(--mantine-color-gray-0),
     var(--mantine-color-dark-6)
   );
+  margin-bottom: var(--mantine-spacing-md);
 }
 
 .headerContainer {

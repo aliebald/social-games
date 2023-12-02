@@ -1,5 +1,13 @@
 import styles from "./page.module.css";
 
 export default function Home() {
-  return "TODO";
+  return (
+    <div>
+      Landing Page
+      <br />
+      About
+      <br />
+      Help / HowTo
+    </div>
+  );
 }

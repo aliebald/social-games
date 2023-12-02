@@ -1,0 +1,13 @@
+.modal {
+  padding: 0;
+}
+
+.closeBtn {
+  position: absolute;
+  top: var(--mantine-spacing-md);
+  right: var(--mantine-spacing-md);
+}
+
+.img {
+  /* position: absolute; */
+}
