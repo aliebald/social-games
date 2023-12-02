@@ -5,6 +5,7 @@ import "@fontsource/inter";
 import type { Metadata } from "next";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import theme from "@/theme";
+import Header from "@/organisms/header/header";
 
 export const metadata: Metadata = {
   title: "Games Finder",
@@ -22,7 +23,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <ColorSchemeScript />
       </head>
       <body>
-        <MantineProvider theme={theme}>{children}</MantineProvider>
+        <MantineProvider theme={theme} defaultColorScheme="dark">
+          <Header />
+          {children}
+        </MantineProvider>
       </body>
     </html>
   );

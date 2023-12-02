@@ -1,6 +1,8 @@
 "use client";
 
-import LinkButton from "../linkButton/linkButton";
+import styles from "./headerLink.module.css";
+import classNames from "classnames";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 interface HeaderButtonProps {
@@ -18,15 +20,13 @@ export default function HeaderLink({
   const active = pathname === href;
 
   return (
-    <LinkButton
-      size="sm"
-      variant={active ? "light" : "plain"}
-      color="neutral"
+    <Link
       href={href}
-      aria-pressed={active}
-      className={className}
+      className={classNames(className, styles.headerLink, {
+        [styles.active]: active,
+      })}
     >
       {label}
-    </LinkButton>
+    </Link>
   );
 }

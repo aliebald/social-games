@@ -4,7 +4,7 @@ import HeaderLink from "@/atoms/headerLink/headerLink";
 
 export default function Header() {
   return (
-    <header>
+    <header className={styles.outerWrapper}>
       <Container size="md" className={styles.headerContainer}>
         <Group gap={5} align="center" className={styles.group}>
           <HeaderLink href="/" label="Home" />

@@ -1,6 +1,5 @@
-import Header from "@/organisms/header/header";
 import styles from "./page.module.css";
 
 export default function Home() {
-  return <Header />;
+  return "TODO";
 }
