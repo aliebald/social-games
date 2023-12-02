@@ -8,8 +8,13 @@ export default function Header() {
       <Container size="md" className={styles.headerContainer}>
         <Group gap={5} align="center" className={styles.group}>
           <HeaderLink href="/" label="Home" />
-          <HeaderLink href="/games" label="Games" />
-          <HeaderLink href="/login" label="Login" className={styles.mlAuto} />
+          <HeaderLink href="/games/list" label="Games" />
+          <HeaderLink
+            href="/games/create"
+            label="Add Game"
+            className={styles.mlAuto}
+          />
+          <HeaderLink href="/login" label="Login" />
         </Group>
       </Container>
     </header>

@@ -5,7 +5,7 @@ export const testData: Game[] = [
     id: "000",
     title: "Gartic Phone",
     description: "Stille-Post-Onlinespiel",
-    url: "https://garticphone.com/de",
+    websiteUrl: "https://garticphone.com/de",
     image: "https://garticphone.com/images/thumb.png",
   },
   {
@@ -13,7 +13,7 @@ export const testData: Game[] = [
     title: "Skribbl.io",
     description:
       "Free online multiplayer drawing and guessing pictionary game.",
-    url: "https://skribbl.io/",
+    websiteUrl: "https://skribbl.io/",
     image: "https://skribbl.io/img/thumbnail.png",
   },
   {
@@ -21,35 +21,35 @@ export const testData: Game[] = [
     title: "Codenames",
     description:
       "Online game room for playing Codenames – just invite your friends.",
-    url: "https://codenames.game/",
+    websiteUrl: "https://codenames.game/",
     image: "https://codenames.game/img/ogimage.png",
   },
   {
     id: "003",
     title: "HaxBall",
     description: "Physics-based multiplayer soccer game where teamwork is key.",
-    url: "https://www.haxball.com/",
+    websiteUrl: "https://www.haxball.com/",
     image: "",
   },
   {
     id: "004",
     title: "Frantic",
     description: "Physics-based multiplayer soccer game where teamwork is key.",
-    url: "https://frantic.online/",
+    websiteUrl: "https://frantic.online/",
     image: "",
   },
   {
     id: "005",
     title: "Colonist.io",
     description: "Settlers of Catan alternative",
-    url: "https://colonist.io/",
+    websiteUrl: "https://colonist.io/",
     image: "https://colonist.io/dist/images/square_logo.png",
   },
   {
     id: "006",
     title: "Dominion",
     description: "Dominion Online Web Client",
-    url: "https://dominion.games/",
+    websiteUrl: "https://dominion.games/",
     image: "",
   },
   {
@@ -57,7 +57,7 @@ export const testData: Game[] = [
     title: "Skull",
     description:
       "Skull card game Skull card game Skull card game Skull card game Skull card game Skull card game Skull card game Skull card game",
-    url: "https://skull.games/",
+    websiteUrl: "https://skull.games/",
     image: "",
   },
 ];

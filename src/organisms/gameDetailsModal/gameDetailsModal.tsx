@@ -1,7 +1,7 @@
 import styles from "./gameDetailsModal.module.css";
 import Game from "@/types/game";
-import { Group, Image, Modal, Text, Title } from "@mantine/core";
-import { IconWorld } from "@tabler/icons-react";
+import { Group, Image, Modal, Text, Title, Flex } from "@mantine/core";
+import { IconWorld, IconPencil } from "@tabler/icons-react";
 import LinkIconWithTooltip from "@/molecules/linkIconWithTooltip/linkIconWithTooltip";
 
 interface GameDetailsModalProps {
@@ -33,17 +33,24 @@ export default function GameDetailsModal({
           className={styles.img}
         />
         <Modal.Body pt="md">
-          <Group justify="space-between" gap={0}>
+          <Flex justify="space-between" gap="xs" wrap="wrap">
             <Title size="h2" fw={500}>
               {game.title}
             </Title>
-            <LinkIconWithTooltip
-              href={game.url}
-              tooltip={`Go to ${game.title}`}
-              Icon={IconWorld}
-              openInNewTab
-            />
-          </Group>
+            <Group gap="xs">
+              <LinkIconWithTooltip
+                href={`/games/edit/${game.id}`}
+                tooltip={`Edit ${game.title}`}
+                Icon={IconPencil}
+              />
+              <LinkIconWithTooltip
+                href={game.websiteUrl}
+                tooltip={`Go to ${game.title}`}
+                Icon={IconWorld}
+                openInNewTab
+              />
+            </Group>
+          </Flex>
 
           <Text fz="sm" mt="xs">
             {game.description}

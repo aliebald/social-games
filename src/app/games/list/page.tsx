@@ -1,7 +1,7 @@
 "use client";
 
 import GamesGrid from "@/organisms/gamesGrid/gamesGrid";
-import { testData } from "../../testData";
+import { testData } from "../../../testData";
 import { Container } from "@mantine/core";
 import Game from "@/types/game";
 import { useState } from "react";

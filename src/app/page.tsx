@@ -17,7 +17,7 @@ export default function Home() {
       </Title>
       <Text pt="md">
         This site is still in early development. At the moment, you can view a
-        games list <Anchor href="/games">here</Anchor>
+        games list <Anchor href="/games/list">here</Anchor>
       </Text>
     </Container>
   );

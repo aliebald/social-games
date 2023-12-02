@@ -1,4 +1,4 @@
-import { ActionIcon } from "@mantine/core";
+import { ActionIcon, MantineSize } from "@mantine/core";
 import { TablerIconsProps } from "@tabler/icons-react";
 import Link from "next/link";
 import { FC, ForwardedRef, forwardRef } from "react";
@@ -7,17 +7,18 @@ export interface LinkIconProps {
   href: string;
   openInNewTab?: boolean;
   Icon: FC<TablerIconsProps>;
+  size?: MantineSize;
 }
 
 function LinkIcon(
-  { href, openInNewTab, Icon }: LinkIconProps,
+  { href, openInNewTab, size, Icon }: LinkIconProps,
   ref: ForwardedRef<HTMLAnchorElement>
 ) {
   const extProps = openInNewTab ? { target: "_blank", rel: "noopener" } : {};
 
   return (
     <Link href={href} {...extProps} ref={ref}>
-      <ActionIcon variant="light">
+      <ActionIcon variant="light" size={size}>
         <Icon style={{ width: "75%", height: "75%" }} />
       </ActionIcon>
     </Link>

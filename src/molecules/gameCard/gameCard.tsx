@@ -36,7 +36,7 @@ export default function GameCard({ game, openDetails }: GameCardProps) {
           </Text>
           <LinkIconWithTooltip
             tooltip={`Go to ${game.title}`}
-            href={game.url}
+            href={game.websiteUrl}
             Icon={IconWorld}
             openInNewTab
           />
