@@ -21,6 +21,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en">
       <head>
         <ColorSchemeScript />
+        <link rel="icon" type="image/svg+xml" href="favicon.svg" />
       </head>
       <body>
         <MantineProvider theme={theme} defaultColorScheme="dark">
