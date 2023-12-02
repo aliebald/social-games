@@ -20,10 +20,9 @@ export default function HeaderLink({
   return (
     <LinkButton
       size="sm"
-      variant="plain"
+      variant={active ? "light" : "plain"}
       color="neutral"
       href={href}
-      sx={{ ml: "auto" }}
       aria-pressed={active}
       className={className}
     >

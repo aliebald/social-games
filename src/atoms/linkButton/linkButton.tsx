@@ -1,8 +1,8 @@
-import Button, { ButtonProps } from "@mui/joy/Button";
+import { Button, ButtonProps } from "@mantine/core";
 import Link from "next/link";
 import { ForwardedRef, forwardRef } from "react";
 
-interface LinkButtonProps extends Omit<ButtonProps<"a">, "component"> {
+interface LinkButtonProps extends Omit<ButtonProps, "component"> {
   href: string;
 }
 

@@ -1,8 +1,16 @@
-.navList {
+.headerContainer {
+  height: rem(56px);
+  margin-bottom: rem(120px);
+  background-color: var(--mantine-color-body);
+  border-bottom: 1px solid
+    light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+}
+
+.group {
+  height: rem(56px);
   display: flex;
-  flex-direction: row;
-  list-style-type: none;
-  gap: 1rem
+  justify-content: space-between;
+  align-items: center;
 }
 
 .mlAuto {
