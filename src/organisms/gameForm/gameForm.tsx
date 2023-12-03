@@ -10,38 +10,26 @@ import {
   NumberInput,
   SimpleGrid,
 } from "@mantine/core";
-import Game from "@/types/game";
-import { useMemo } from "react";
-
-export type GameFormValues = Omit<Game, "id">;
+import Game, { GameWithoutId } from "@/types/game";
+import { isEqual, omit } from "lodash";
+import { useEffect } from "react";
 
 interface GameFormProps {
-  initialValues?: Game;
-  onSubmit: (game: Game | GameFormValues) => void | Promise<void>;
+  initialValues?: Game | null;
+  onSubmit: (game: Game | GameWithoutId) => void | Promise<void>;
 }
 
-const defaultInitialValues: GameFormValues = {
+const defaultInitialValues: GameWithoutId = {
   title: "",
   description: "",
   websiteUrl: "",
   image: "",
 };
 
-const parseInitialValues = (game: Game): GameFormValues => {
-  const { id, ...result } = game;
-  return result;
-};
-
 export default function GameForm({ initialValues, onSubmit }: GameFormProps) {
-  const initialFormValues = useMemo(
-    () =>
-      initialValues ? parseInitialValues(initialValues) : defaultInitialValues,
-    [initialValues]
-  );
-
-  const form = useForm<GameFormValues>({
+  const form = useForm<GameWithoutId>({
     validateInputOnBlur: true,
-    initialValues: initialFormValues,
+    initialValues: omit(initialValues ?? defaultInitialValues, "id"),
     validate: {
       title: hasLength(
         { min: 3, max: 40 },
@@ -51,6 +39,15 @@ export default function GameForm({ initialValues, onSubmit }: GameFormProps) {
       websiteUrl: isNotEmpty("Enter a url that leads to the games website"),
     },
   });
+
+  useEffect(() => {
+    if (initialValues && !isEqual(initialValues, form.values)) {
+      console.log("Update form values based on initialValues");
+
+      form.setInitialValues(initialValues);
+      form.setValues(initialValues);
+    }
+  }, [form, initialValues]);
 
   return (
     <form onSubmit={form.onSubmit(onSubmit)}>

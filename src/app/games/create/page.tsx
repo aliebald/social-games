@@ -1,12 +1,13 @@
 "use client";
 
-import GameForm, { GameFormValues } from "@/organisms/gameForm/gameForm";
-import Game from "@/types/game";
+import addGame from "@/newtorking/addGame";
+import GameForm from "@/organisms/gameForm/gameForm";
+import Game, { GameWithoutId } from "@/types/game";
 import { Container, Title, Text, Divider } from "@mantine/core";
 
 export default function CreateGamePage() {
-  const onSubmit = (game: Game | GameFormValues) => {
-    console.log(game);
+  const onSubmit = async (game: Game | GameWithoutId) => {
+    await addGame(game);
   };
 
   return (

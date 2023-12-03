@@ -7,3 +7,5 @@ export default interface Game {
   minPlayers?: number;
   maxPlayers?: number;
 }
+
+export type GameWithoutId = Omit<Game, "id">;
