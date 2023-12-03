@@ -1,6 +1,7 @@
 import { Container, Group } from "@mantine/core";
 import styles from "./header.module.css";
 import HeaderLink from "@/atoms/headerLink/headerLink";
+import UserMenu from "@/molecules/userMenu/userMenu";
 
 export default function Header() {
   return (
@@ -14,7 +15,7 @@ export default function Header() {
             label="Add Game"
             className={styles.mlAuto}
           />
-          <HeaderLink href="/login" label="Login" />
+          <UserMenu />
         </Group>
       </Container>
     </header>
