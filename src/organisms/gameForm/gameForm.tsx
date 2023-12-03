@@ -12,7 +12,7 @@ import {
 } from "@mantine/core";
 import Game, { GameWithoutId } from "@/types/game";
 import { isEqual, omit } from "lodash";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 interface GameFormProps {
   initialValues?: Game | null;
@@ -40,14 +40,20 @@ export default function GameForm({ initialValues, onSubmit }: GameFormProps) {
     },
   });
 
+  const formRef = useRef(form);
   useEffect(() => {
+    formRef.current = form;
+  }, [form]);
+
+  useEffect(() => {
+    const form = formRef.current;
     if (initialValues && !isEqual(initialValues, form.values)) {
       console.log("Update form values based on initialValues");
 
       form.setInitialValues(initialValues);
       form.setValues(initialValues);
     }
-  }, [form, initialValues]);
+  }, [initialValues]);
 
   return (
     <form onSubmit={form.onSubmit(onSubmit)}>
