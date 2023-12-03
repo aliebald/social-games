@@ -1,8 +1,8 @@
 "use client";
 
-import { getAuth, signOut } from "firebase/auth";
+import { User, deleteUser, getAuth, signOut } from "firebase/auth";
 import { Menu, rem, Avatar, Button } from "@mantine/core";
-import { IconLogout } from "@tabler/icons-react";
+import { IconLogout, IconTrash } from "@tabler/icons-react";
 import useUser from "@/newtorking/useUser";
 import LoginModal from "@/organisms/loginModal/loginModal";
 import { useState } from "react";
@@ -34,20 +34,33 @@ export default function UserMenu() {
     <Menu shadow="md" width={200}>
       <Menu.Target>
         <Avatar color="cyan" radius="xl">
-          {user?.displayName?.substring(0, 2)}
+          {user.displayName?.substring(0, 2)}
         </Avatar>
       </Menu.Target>
 
       <Menu.Dropdown>
-        <Menu.Label>Welcome {user?.displayName}</Menu.Label>
+        <Menu.Label>Welcome {user.displayName}</Menu.Label>
         <Menu.Item
-          color="red"
+          // color="green"
           leftSection={
             <IconLogout style={{ width: rem(14), height: rem(14) }} />
           }
           onClick={logout}
         >
           Logout
+        </Menu.Item>
+
+        <Menu.Divider />
+
+        <Menu.Label>Danger zone</Menu.Label>
+        <Menu.Item
+          color="red"
+          leftSection={
+            <IconTrash style={{ width: rem(14), height: rem(14) }} />
+          }
+          onClick={() => deleteAccount(user)}
+        >
+          Delete Account
         </Menu.Item>
       </Menu.Dropdown>
     </Menu>
@@ -63,4 +76,20 @@ function logout() {
     .catch((error) => {
       console.warn("Failed sign out", error);
     });
+}
+
+function deleteAccount(user: User) {
+  if (
+    window.confirm(
+      "Do you really want to delete your account? This cannot be undone."
+    )
+  ) {
+    deleteUser(user)
+      .then(() => {
+        console.log("User deleted");
+      })
+      .catch((error) => {
+        console.warn("Failed to delete user", error);
+      });
+  }
 }
