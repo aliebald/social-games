@@ -1,7 +1,15 @@
 "use client";
 
 import { hasLength, isNotEmpty, useForm } from "@mantine/form";
-import { TextInput, Button, Group, Flex, Textarea } from "@mantine/core";
+import {
+  TextInput,
+  Button,
+  Group,
+  Flex,
+  Textarea,
+  NumberInput,
+  SimpleGrid,
+} from "@mantine/core";
 import Game from "@/types/game";
 import { useMemo } from "react";
 
@@ -65,6 +73,16 @@ export default function GameForm({ initialValues, onSubmit }: GameFormProps) {
           label="Website url"
           {...form.getInputProps("websiteUrl")}
         />
+        <SimpleGrid cols={{ base: 1, xs: 2 }} spacing="lg" verticalSpacing="md">
+          <NumberInput
+            label="Min number of Players"
+            {...form.getInputProps("minPlayers")}
+          />
+          <NumberInput
+            label="Max number of Players"
+            {...form.getInputProps("maxPlayers")}
+          />
+        </SimpleGrid>
         <TextInput label="Preview image url" {...form.getInputProps("image")} />
       </Flex>
       <Group justify="flex-end" mt="md">

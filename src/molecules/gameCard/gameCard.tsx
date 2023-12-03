@@ -6,6 +6,7 @@ import { Card, Group, Image, Text } from "@mantine/core";
 import { IconWorld } from "@tabler/icons-react";
 import React from "react";
 import LinkIconWithTooltip from "../linkIconWithTooltip/linkIconWithTooltip";
+import PlayerCount from "@/atoms/playerCount/playerCount";
 
 interface GameCardProps {
   game: Game;
@@ -41,6 +42,11 @@ export default function GameCard({ game, openDetails }: GameCardProps) {
             openInNewTab
           />
         </Group>
+        <PlayerCount
+          size="xs"
+          minPlayers={game.minPlayers}
+          maxPlayers={game.maxPlayers}
+        />
         <Text fz="sm" mt="xs" lineClamp={3}>
           {game.description}
         </Text>

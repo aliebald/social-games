@@ -3,6 +3,7 @@ import Game from "@/types/game";
 import { Group, Image, Modal, Text, Title, Flex } from "@mantine/core";
 import { IconWorld, IconPencil } from "@tabler/icons-react";
 import LinkIconWithTooltip from "@/molecules/linkIconWithTooltip/linkIconWithTooltip";
+import PlayerCount from "@/atoms/playerCount/playerCount";
 
 interface GameDetailsModalProps {
   game: Game;
@@ -51,7 +52,10 @@ export default function GameDetailsModal({
               />
             </Group>
           </Flex>
-
+          <PlayerCount
+            minPlayers={game.minPlayers}
+            maxPlayers={game.maxPlayers}
+          />
           <Text fz="sm" mt="xs">
             {game.description}
           </Text>

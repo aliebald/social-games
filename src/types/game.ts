@@ -4,4 +4,6 @@ export default interface Game {
   description: string;
   websiteUrl: string;
   image: string;
+  minPlayers?: number;
+  maxPlayers?: number;
 }
