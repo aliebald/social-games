@@ -4,13 +4,13 @@ import { Container, Title, Text, Button } from "@mantine/core";
 import styles from "./page.module.css";
 import Anchor from "@/atoms/anchor/anchor";
 import { testGames, testTags } from "@/testData";
-import addGame from "@/newtorking/addGame";
-import addTag from "@/newtorking/addTag";
-import fetchTags from "@/newtorking/fetchTags";
+import addGame from "@/networking/addGame";
+import addTag from "@/networking/addTag";
+import fetchTags from "@/networking/fetchTags";
 import { getRandomArrayElements } from "@/util";
-import fetchGames from "@/newtorking/fetchGames";
-import deleteGame from "@/newtorking/deleteGame";
-import deleteTag from "@/newtorking/deleteTag";
+import fetchGames from "@/networking/fetchGames";
+import deleteGame from "@/networking/deleteGame";
+import deleteTag from "@/networking/deleteTag";
 
 export default function Home() {
   const addTestdata = async () => {

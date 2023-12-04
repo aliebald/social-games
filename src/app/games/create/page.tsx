@@ -1,6 +1,6 @@
 "use client";
 
-import addGame from "@/newtorking/addGame";
+import addGame from "@/networking/addGame";
 import GameForm from "@/organisms/gameForm/gameForm";
 import Game, { GameWithoutId } from "@/types/game";
 import { Container, Title, Text, Divider } from "@mantine/core";

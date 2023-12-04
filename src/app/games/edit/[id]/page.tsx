@@ -4,8 +4,8 @@ import GameForm from "@/organisms/gameForm/gameForm";
 import { Container, LoadingOverlay, Title, Text, Divider } from "@mantine/core";
 import styles from "./page.module.css";
 import Game, { GameWithoutId } from "@/types/game";
-import updateGame from "@/newtorking/updateGame";
-import useGame from "@/newtorking/useGame";
+import updateGame from "@/networking/updateGame";
+import useGame from "@/networking/useGame";
 
 interface EditGamePageProps {
   params: { id: string };

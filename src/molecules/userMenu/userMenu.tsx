@@ -3,7 +3,7 @@
 import { User, deleteUser, getAuth, signOut } from "firebase/auth";
 import { Menu, rem, Avatar, Button } from "@mantine/core";
 import { IconLogout, IconTrash } from "@tabler/icons-react";
-import useUser from "@/newtorking/useUser";
+import useUser from "@/networking/useUser";
 import LoginModal from "@/organisms/loginModal/loginModal";
 import { useState } from "react";
 

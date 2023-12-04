@@ -5,7 +5,7 @@ import { Container } from "@mantine/core";
 import Game from "@/types/game";
 import { useState } from "react";
 import GameDetailsModal from "@/organisms/gameDetailsModal/gameDetailsModal";
-import useGames from "@/newtorking/useGames";
+import useGames from "@/networking/useGames";
 
 export default function GamesPage() {
   const games = useGames();
