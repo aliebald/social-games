@@ -3,33 +3,43 @@
 import { Container, Title, Text, Button } from "@mantine/core";
 import styles from "./page.module.css";
 import Anchor from "@/atoms/anchor/anchor";
-import { testData } from "@/testData";
+import { testGames, testTags } from "@/testData";
 import addGame from "@/newtorking/addGame";
-import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
-import { db } from "@/firebase";
-import parseGame from "@/newtorking/game";
+import addTag from "@/newtorking/addTag";
+import fetchTags from "@/newtorking/fetchTags";
+import { getRandomArrayElements } from "@/util";
+import fetchGames from "@/newtorking/fetchGames";
+import deleteGame from "@/newtorking/deleteGame";
+import deleteTag from "@/newtorking/deleteTag";
 
 export default function Home() {
   const addTestdata = async () => {
     console.log("Adding Testdata to database...");
-    await Promise.all(testData.map((game) => addGame(game)));
+
+    await Promise.all(testTags.map(async (tag) => (await addTag(tag)).id));
+    const tags = await fetchTags();
+    console.log("tags", tags);
+
+    await Promise.all(
+      testGames.map((game) =>
+        addGame({ ...game, tags: getRandomArrayElements(tags) })
+      )
+    );
     console.log("Successfully added testdata");
   };
 
   // Temporary
   const deleteDb = async () => {
-    console.log("Fetch games");
-    await getDocs(collection(db, "games")).then(async (querySnapshot) => {
-      const newData = querySnapshot.docs.map(parseGame);
-      console.log(
-        "Fetched games - now deleting:",
-        newData.map((g) => g.id)
-      );
-      await Promise.all(
-        newData.map((game) => deleteDoc(doc(db, "games", game.id)))
-      );
-      console.log("deleted all documents");
-    });
+    console.group("Delete DB");
+
+    const games = await fetchGames();
+    await Promise.all(games.map((game) => deleteGame(game.id)));
+
+    const tags = await fetchTags();
+    await Promise.all(tags.map((tags) => deleteTag(tags.id)));
+
+    console.log("Successfully deleted DB");
+    console.groupEnd();
   };
 
   return (
