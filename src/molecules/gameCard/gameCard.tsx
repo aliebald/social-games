@@ -7,6 +7,7 @@ import { IconWorld } from "@tabler/icons-react";
 import React from "react";
 import LinkIconWithTooltip from "../linkIconWithTooltip/linkIconWithTooltip";
 import PlayerCount from "@/atoms/playerCount/playerCount";
+import Tags from "../tags/tags";
 
 interface GameCardProps {
   game: Game;
@@ -47,7 +48,8 @@ export default function GameCard({ game, openDetails }: GameCardProps) {
           minPlayers={game.minPlayers}
           maxPlayers={game.maxPlayers}
         />
-        <Text fz="sm" mt="xs" lineClamp={3}>
+        <Tags tags={game.tags} size="xs" my="xs" />
+        <Text fz="sm" lineClamp={3}>
           {game.description}
         </Text>
       </Card.Section>

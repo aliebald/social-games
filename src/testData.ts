@@ -113,11 +113,13 @@ export const testTags: Tag[] = [
     id: "T04",
     title: "Board Game Arena",
     description: "This game can be found on the Board Game Arena",
+    color: "#E67700",
   },
   {
     id: "T05",
     title: "Classic",
     description: "Everybody needs to know this",
+    color: "#0CA678",
   },
   {
     id: "T06",
@@ -128,5 +130,6 @@ export const testTags: Tag[] = [
     id: "T07",
     title: "Short",
     description: "Suitable for short rounds.",
+    color: "#748FFC",
   },
 ];

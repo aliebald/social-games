@@ -1,9 +1,10 @@
 import styles from "./gameDetailsModal.module.css";
 import Game from "@/types/game";
-import { Group, Image, Modal, Text, Title, Flex } from "@mantine/core";
+import { Group, Image, Modal, Text, Title, Flex, Divider } from "@mantine/core";
 import { IconWorld, IconPencil } from "@tabler/icons-react";
 import LinkIconWithTooltip from "@/molecules/linkIconWithTooltip/linkIconWithTooltip";
 import PlayerCount from "@/atoms/playerCount/playerCount";
+import Tags from "@/molecules/tags/tags";
 
 interface GameDetailsModalProps {
   game: Game;
@@ -35,7 +36,7 @@ export default function GameDetailsModal({
         />
         <Modal.Body pt="md">
           <Flex justify="space-between" gap="xs" wrap="wrap">
-            <Title size="h2" fw={500}>
+            <Title size="h1" fw={500}>
               {game.title}
             </Title>
             <Group gap="xs">
@@ -56,9 +57,9 @@ export default function GameDetailsModal({
             minPlayers={game.minPlayers}
             maxPlayers={game.maxPlayers}
           />
-          <Text fz="sm" mt="xs">
-            {game.description}
-          </Text>
+          <Tags tags={game.tags} pt="sm" />
+          <Divider my="sm" />
+          <Text fz="sm">{game.description}</Text>
         </Modal.Body>
       </Modal.Content>
     </Modal.Root>
