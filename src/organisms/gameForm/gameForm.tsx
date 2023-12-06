@@ -24,6 +24,7 @@ const defaultInitialValues: GameWithoutId = {
   description: "",
   websiteUrl: "",
   image: "",
+  tags: [],
 };
 
 export default function GameForm({ initialValues, onSubmit }: GameFormProps) {

@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint && npm run prettier",
+    "lint": "tsc --noEmit && next lint && npm run prettier",
+    "lint:tsc": "tsc --noEmit",
     "prettier": "prettier --check --ignore-path .gitignore ./src",
     "prettify": "prettier --write --ignore-path .gitignore ./src"
   },
