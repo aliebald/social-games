@@ -1,9 +1,8 @@
-import type Game from "./types/game";
+import { GameWithoutId } from "./types/game";
 import Tag from "./types/tag";
 
-export const testGames: Game[] = [
+export const testGames: GameWithoutId[] = [
   {
-    id: "G00",
     title: "Gartic Phone",
     description: "Stille-Post-Onlinespiel",
     websiteUrl: "https://garticphone.com/de",
@@ -13,7 +12,6 @@ export const testGames: Game[] = [
     tags: [],
   },
   {
-    id: "G01",
     title: "Skribbl.io",
     description:
       "Free online multiplayer drawing and guessing pictionary game.",
@@ -24,67 +22,90 @@ export const testGames: Game[] = [
     tags: [],
   },
   {
-    id: "G02",
     title: "Codenames",
     description:
       "Online game room for playing Codenames – just invite your friends.",
     websiteUrl: "https://codenames.game/",
     image: "https://codenames.game/img/ogimage.png",
+    minPlayers: 2,
     tags: [],
   },
   {
-    id: "G03",
     title: "HaxBall",
     description: "Physics-based multiplayer soccer game where teamwork is key.",
     websiteUrl: "https://www.haxball.com/",
     image: "",
     maxPlayers: 15,
+    minPlayers: 2,
     tags: [],
   },
   {
-    id: "G04",
     title: "Frantic",
     description: "Physics-based multiplayer soccer game where teamwork is key.",
     websiteUrl: "https://frantic.online/",
-    image: "",
+    image:
+      "https://images.thalia.media/00/-/bfe22f96d25b4b6d8bccc37e98733001/game-factory-frantic.jpeg",
     tags: [],
   },
   {
-    id: "G05",
     title: "Colonist.io",
     description: "Settlers of Catan alternative",
     websiteUrl: "https://colonist.io/",
     image: "https://colonist.io/dist/images/square_logo.png",
+    minPlayers: 2,
+    maxPlayers: 4,
     tags: [],
   },
   {
-    id: "G06",
     title: "Dominion",
     description: "Dominion Online Web Client",
     websiteUrl: "https://dominion.games/",
-    image: "",
+    image:
+      "https://www.spielkarten.com/wp-content/uploads/2019/07/dominion_basisspiel_2._edition.png.webp",
     minPlayers: 2,
+    maxPlayers: 4,
     tags: [],
   },
   {
-    id: "G07",
-    title: "Skull",
+    title: "GeoGuessr",
     description:
-      "Skull card game Skull card game Skull card game Skull card game Skull card game Skull card game Skull card game Skull card game",
-    websiteUrl: "https://skull.games/",
-    image: "",
+      "GeoGuessr is a geography game which takes you on a journey around the " +
+      "world and challenges your ability to recognize your surroundings.",
+    websiteUrl: "https://www.geoguessr.com",
+    image: "https://www.geoguessr.com/_next/static/media/default.2f95f25d.png",
+    maxPlayers: 10,
     tags: [],
   },
   {
-    id: "G08",
+    title: "Geotastic",
+    description:
+      "Geotastic is a free to play multiplayer focused geo quiz app that can " +
+      "be played with friends simultaneously. A free alternative to geoguessr.",
+    websiteUrl: "https://geotastic.net",
+    image:
+      "https://static.rocketbeans.tv/img/3e55ab9f-b6d4-4baa-bad1-b64ce562a746_orig.png",
+    tags: [],
+    maxPlayers: 6,
+  },
+  {
     title: "Wizard",
     description:
-      "Fast-paced trick-taking card game with simple rules and a certain amount of schadenfreude",
+      "Fast-paced trick-taking card game with simple rules and a certain " +
+      "amount of schadenfreude",
     websiteUrl: "https://boardgamearena.com/",
     image:
       "https://m.media-amazon.com/images/I/71VBPC7BcRL._AC_UF894,1000_QL80_.jpg",
     tags: [],
-    minPlayers: 2,
+    minPlayers: 3,
+    maxPlayers: 6,
+  },
+  {
+    title: "Skull",
+    description: "Skull card game",
+    websiteUrl: "https://skull.games/",
+    image:
+      "https://cdn.zatu.com/wp-content/uploads/2019/04/18112035/How-to-Play-Skull.jpg",
+    tags: [],
   },
 ];
 
@@ -131,5 +152,11 @@ export const testTags: Tag[] = [
     title: "Short",
     description: "Suitable for short rounds.",
     color: "#748FFC",
+  },
+  {
+    id: "T08",
+    title: "Beginner Friendly",
+    description: "Suitable for new players.",
+    color: "#9775FA",
   },
 ];
