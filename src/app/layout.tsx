@@ -3,6 +3,8 @@ import "@mantine/core/styles.css";
 import "@fontsource/inter";
 
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import theme from "@/theme";
 import Header from "@/organisms/header/header";
@@ -24,6 +26,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <link rel="icon" type="image/svg+xml" href="favicon.svg" />
       </head>
       <body>
+        <Analytics />
+        <SpeedInsights />
         <MantineProvider theme={theme} defaultColorScheme="dark">
           <Header />
           {children}
