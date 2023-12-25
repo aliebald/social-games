@@ -22,7 +22,10 @@ export default function Home() {
 
     await Promise.all(
       testGames.map((game) =>
-        addGame({ ...game, tags: getRandomArrayElements(tags, 4) })
+        addGame({
+          ...game,
+          tags: getRandomArrayElements(tags, 4).map((tag) => tag.id),
+        })
       )
     );
     console.log("Successfully added testdata");

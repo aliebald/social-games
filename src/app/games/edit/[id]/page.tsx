@@ -1,11 +1,12 @@
 "use client";
 
-import GameForm from "@/organisms/gameForm/gameForm";
+import GameForm, { GameFormValues } from "@/organisms/gameForm/gameForm";
 import { Container, LoadingOverlay, Title, Text, Divider } from "@mantine/core";
 import styles from "./page.module.css";
-import Game, { GameWithoutId } from "@/types/game";
 import updateGame from "@/networking/updateGame";
 import useGame from "@/networking/useGame";
+import { useMemo } from "react";
+import { parseGameToGameFormValues } from "@/organisms/gameForm/util";
 
 interface EditGamePageProps {
   params: { id: string };
@@ -13,15 +14,13 @@ interface EditGamePageProps {
 
 export default function EditGamePage({ params }: EditGamePageProps) {
   const game = useGame(params.id);
+  const gameFormValues = useMemo(
+    () => (game ? parseGameToGameFormValues(game) : null),
+    [game]
+  );
 
-  const onSubmit = async (game: Game | GameWithoutId) => {
-    console.log(game);
-    if (!("id" in game)) {
-      // Should not happen, remove when GameForm typing is better
-      throw new Error("Missing id in game - TODO: improve type");
-    }
-
-    await updateGame(game);
+  const onSubmit = async (game: GameFormValues) => {
+    await updateGame(params.id, game);
   };
 
   return (
@@ -36,7 +35,7 @@ export default function EditGamePage({ params }: EditGamePageProps) {
         <Title pb="sm">Edit {game?.title}</Title>
         <Text>Edit an existing title.</Text>
         <Divider my="md" />
-        <GameForm initialValues={game} onSubmit={onSubmit} />
+        <GameForm initialValues={gameFormValues} onSubmit={onSubmit} />
       </Container>
     </>
   );

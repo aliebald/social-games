@@ -10,16 +10,21 @@ import {
   NumberInput,
   SimpleGrid,
 } from "@mantine/core";
-import Game, { GameWithoutId } from "@/types/game";
+import Game from "@/types/game";
 import { isEqual, omit } from "lodash";
 import { useEffect, useRef } from "react";
+import TagsInput from "@/molecules/tagsInput/tagsInput";
 
-interface GameFormProps {
-  initialValues?: Game | null;
-  onSubmit: (game: Game | GameWithoutId) => void | Promise<void>;
+export interface GameFormValues extends Omit<Game, "tags" | "id"> {
+  tags: string[];
 }
 
-const defaultInitialValues: GameWithoutId = {
+interface GameFormProps {
+  initialValues?: GameFormValues | null;
+  onSubmit: (game: GameFormValues) => void | Promise<void>;
+}
+
+const defaultInitialValues: GameFormValues = {
   title: "",
   description: "",
   websiteUrl: "",
@@ -28,7 +33,7 @@ const defaultInitialValues: GameWithoutId = {
 };
 
 export default function GameForm({ initialValues, onSubmit }: GameFormProps) {
-  const form = useForm<GameWithoutId>({
+  const form = useForm<GameFormValues>({
     validateInputOnBlur: true,
     initialValues: omit(initialValues ?? defaultInitialValues, "id"),
     validate: {
@@ -72,6 +77,7 @@ export default function GameForm({ initialValues, onSubmit }: GameFormProps) {
           label="Description"
           {...form.getInputProps("description")}
         />
+        <TagsInput {...form.getInputProps("tags")} />
         <TextInput
           withAsterisk
           label="Website url"

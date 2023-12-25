@@ -1,9 +1,7 @@
-import { db } from "@/firebase";
 import {
   DocumentData,
   DocumentReference,
   QueryDocumentSnapshot,
-  doc,
   getDoc,
 } from "firebase/firestore";
 import Tag, { deserializeTag } from "./tag";
@@ -60,16 +58,5 @@ export async function deserializeGame(
     ...data,
     id: backendSnapshot.id,
     tags,
-  };
-}
-
-/** Parse {@link Game} into backend format */
-export function serializeGame(
-  game: Game | GameWithoutId
-): BackendGame | BackendGameWithoutId {
-  const { tags, ...gameWithoutTags } = game;
-  return {
-    ...gameWithoutTags,
-    tags: tags.map((tag) => doc(db, `tags/${tag.id}`)),
   };
 }

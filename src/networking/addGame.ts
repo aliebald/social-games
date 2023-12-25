@@ -1,13 +1,13 @@
-import Game, { GameWithoutId, serializeGame } from "@/types/game";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "@/firebase";
-import { omit } from "lodash";
+import { GameFormValues } from "@/organisms/gameForm/gameForm";
+import { parseGameFormValuesToBackendFormat } from "@/organisms/gameForm/util";
 
-export default async function addGame(game: Game | GameWithoutId) {
-  console.log("Adding game", game);
-  const serializedGame = serializeGame(omit(game, "id"));
+export default async function addGame(gameFormValues: GameFormValues) {
+  console.log("Adding game", gameFormValues);
+
+  const serializedGame = parseGameFormValuesToBackendFormat(gameFormValues);
   const docRef = await addDoc(collection(db, "games"), serializedGame);
 
   console.log("Added game with ID:", docRef.id);
-  return docRef;
 }
