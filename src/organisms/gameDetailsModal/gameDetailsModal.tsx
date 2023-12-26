@@ -8,12 +8,14 @@ import Tags from "@/molecules/tags/tags";
 
 interface GameDetailsModalProps {
   game: Game;
+  canEdit: boolean;
   open: boolean;
   close: () => void;
 }
 
 export default function GameDetailsModal({
   game,
+  canEdit,
   open,
   close,
 }: GameDetailsModalProps) {
@@ -40,11 +42,13 @@ export default function GameDetailsModal({
               {game.title}
             </Title>
             <Group gap="xs">
-              <LinkIconWithTooltip
-                href={`/games/edit/${game.id}`}
-                tooltip={`Edit ${game.title}`}
-                Icon={IconPencil}
-              />
+              {canEdit && (
+                <LinkIconWithTooltip
+                  href={`/games/edit/${game.id}`}
+                  tooltip={`Edit ${game.title}`}
+                  Icon={IconPencil}
+                />
+              )}
               <LinkIconWithTooltip
                 href={game.websiteUrl}
                 tooltip={`Go to ${game.title}`}

@@ -6,8 +6,10 @@ import Game from "@/types/game";
 import { useState } from "react";
 import GameDetailsModal from "@/organisms/gameDetailsModal/gameDetailsModal";
 import useGames from "@/networking/useGames";
+import useUser from "@/networking/useUser";
 
 export default function GamesPage() {
+  const user = useUser();
   const games = useGames();
 
   // Keep last gameDetails for close animation of modal
@@ -25,6 +27,7 @@ export default function GamesPage() {
       {gameDetails !== null && (
         <GameDetailsModal
           game={gameDetails}
+          canEdit={user !== null && user.uid === gameDetails.author_uid}
           open={gameDetailsOpen}
           close={() => setGameDetailsOpen(false)}
         />
