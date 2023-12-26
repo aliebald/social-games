@@ -68,13 +68,18 @@ export default function Home() {
         This site is still in early development. At the moment, you can view a
         games list <Anchor href="/games">here</Anchor>
       </Text>
-      <Title size="h2" order={2} pt="xl" pb="md">
-        Danger Zone
-      </Title>
-      <Button onClick={addTestdata}>Add Testdata</Button>
-      <Button ml="md" onClick={deleteDb} color="red">
-        Delete DB
-      </Button>
+      {/* TODO remove - temporary */}
+      {user?.displayName?.startsWith("Alexander") && (
+        <>
+          <Title size="h2" order={2} pt="xl" pb="md">
+            Dev Zone
+          </Title>
+          <Button onClick={addTestdata}>Add Testdata</Button>
+          <Button ml="md" onClick={deleteDb} color="red">
+            Delete DB
+          </Button>
+        </>
+      )}
     </Container>
   );
 }
