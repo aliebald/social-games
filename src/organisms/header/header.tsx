@@ -10,6 +10,7 @@ export default function Header() {
         <Group gap={5} align="center" className={styles.group}>
           <HeaderLink href="/" label="Home" />
           <HeaderLink href="/games/list" label="Games" />
+          <HeaderLink href="/tags" label="Tags" />
           <HeaderLink
             href="/games/create"
             label="Add Game"
