@@ -7,6 +7,7 @@ import updateGame from "@/networking/updateGame";
 import useGame from "@/networking/useGame";
 import { useMemo } from "react";
 import { parseGameToGameFormValues } from "@/organisms/gameForm/util";
+import { showLoadingNotification } from "@/molecules/loadingNotification/loadingNotification";
 
 interface EditGamePageProps {
   params: { id: string };
@@ -19,8 +20,27 @@ export default function EditGamePage({ params }: EditGamePageProps) {
     [game]
   );
 
-  const onSubmit = async (game: GameFormValues) => {
-    await updateGame(params.id, game);
+  const onSubmit = async (gameFormValues: GameFormValues) => {
+    const { successNotification, errorNotification } = showLoadingNotification({
+      title: "Updating Game",
+      message: `Updating ${gameFormValues.title}`,
+    });
+
+    try {
+      await updateGame(params.id, gameFormValues);
+    } catch (error) {
+      console.error("Failed to update game. Error:", error);
+      errorNotification({
+        title: "Error",
+        message: `Failed to update ${gameFormValues.title}`,
+      });
+      return;
+    }
+
+    successNotification({
+      title: "Success",
+      message: `Successfully updated ${gameFormValues.title}`,
+    });
   };
 
   return (

@@ -1,10 +1,12 @@
 import "./globals.css";
 import "@mantine/core/styles.css";
+import "@mantine/notifications/styles.css";
 
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
+import { Notifications } from "@mantine/notifications";
 import theme from "@/theme";
 import Header from "@/organisms/header/header";
 
@@ -28,6 +30,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <Analytics />
         <SpeedInsights />
         <MantineProvider theme={theme} defaultColorScheme="dark">
+          <Notifications position="bottom-right" />
           <Header />
           {children}
         </MantineProvider>
