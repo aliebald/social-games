@@ -15,7 +15,8 @@ import { omit } from "lodash";
 import { useEffect, useRef } from "react";
 import TagsInput from "@/molecules/tagsInput/tagsInput";
 
-export interface GameFormValues extends Omit<Game, "tags" | "id"> {
+export interface GameFormValues
+  extends Omit<Game, "tags" | "id" | "author_uid"> {
   tags: string[];
 }
 

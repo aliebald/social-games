@@ -1,3 +1,7 @@
+// Based on firebase docs and https://stackoverflow.com/a/61988155
+// resource only exists when reading from DB
+// request.resource only exists when writing to DB (reading from the user)
+
 rules_version = '2';
 
 service cloud.firestore {
@@ -5,15 +9,23 @@ service cloud.firestore {
 
     match /games/{game} {
       allow read: if true;
-      allow create: if request.auth != null;
-      allow update: if request.auth != null;
-      allow delete: if request.auth != null;
+      allow create, update, delete: if (isLoggedIn() && isDocumentOwner())
     }
     match /tags/{tag} {
       allow read: if true;
-      allow create: if request.auth != null;
-      allow update: if request.auth != null;
-      allow delete: if request.auth != null;
+      allow create, update, delete: if (isLoggedIn() && isDocumentOwner())
+    }
+
+    function isLoggedIn() {
+      return request.auth != null;
+    }
+
+    function isDocumentOwner() {
+      return getResourceData().author_uid == request.auth.uid;
+    }
+
+    function getResourceData() {
+      return resource == null ? request.resource.data : resource.data
     }
   }
 }

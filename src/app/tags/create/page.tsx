@@ -2,12 +2,14 @@
 
 import { showLoadingNotification } from "@/molecules/loadingNotification/loadingNotification";
 import addTag from "@/networking/addTag";
+import useUser from "@/networking/useUser";
 import TagForm, { TagFormValues } from "@/organisms/tagForm/tagForm";
 import { Container, Title, Text, Divider } from "@mantine/core";
 import { useRouter } from "next/navigation";
 
 export default function CreateTagPage() {
   const router = useRouter();
+  const user = useUser();
 
   const onSubmit = async (tagFormValues: TagFormValues) => {
     const { successNotification, errorNotification } = showLoadingNotification({
@@ -15,8 +17,16 @@ export default function CreateTagPage() {
       message: `Saving ${tagFormValues.title}`,
     });
 
+    if (user === null) {
+      errorNotification({
+        title: "Error",
+        message: `Failed to create ${tagFormValues.title}, please log in and try again.`,
+      });
+      return;
+    }
+
     try {
-      const tagId = await addTag(tagFormValues);
+      const tagId = await addTag(tagFormValues, user.uid);
       successNotification({
         title: "Success",
         message: `Successfully saved ${tagFormValues.title}`,

@@ -2,12 +2,14 @@
 
 import { showLoadingNotification } from "@/molecules/loadingNotification/loadingNotification";
 import addGame from "@/networking/addGame";
+import useUser from "@/networking/useUser";
 import GameForm, { GameFormValues } from "@/organisms/gameForm/gameForm";
 import { Container, Title, Text, Divider } from "@mantine/core";
 import { useRouter } from "next/navigation";
 
 export default function CreateGamePage() {
   const router = useRouter();
+  const user = useUser();
 
   const onSubmit = async (gameFormValues: GameFormValues) => {
     const { successNotification, errorNotification } = showLoadingNotification({
@@ -15,8 +17,16 @@ export default function CreateGamePage() {
       message: `Saving ${gameFormValues.title}`,
     });
 
+    if (user === null) {
+      errorNotification({
+        title: "Error",
+        message: `Failed to create ${gameFormValues.title}, please log in and try again.`,
+      });
+      return;
+    }
+
     try {
-      const gameId = await addGame(gameFormValues);
+      const gameId = await addGame(gameFormValues, user.uid);
       successNotification({
         title: "Success",
         message: `Successfully saved ${gameFormValues.title}`,

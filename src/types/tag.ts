@@ -9,6 +9,7 @@ export default interface Tag {
   title: string;
   description: string;
   color?: string;
+  author_uid: string;
 }
 
 export type TagWithoutId = Omit<Tag, "id">;
@@ -20,6 +21,7 @@ export type TagWithoutId = Omit<Tag, "id">;
 const defaultTag: Omit<Tag, "id"> = {
   title: "",
   description: "",
+  author_uid: "unknown",
 };
 
 /** Parse Tag from backend */

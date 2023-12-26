@@ -5,9 +5,13 @@ import { parseGameFormValuesToBackendFormat } from "@/organisms/gameForm/util";
 
 export default async function updateGame(
   id: string,
-  gameFormValues: GameFormValues
+  gameFormValues: GameFormValues,
+  author_uid: string
 ) {
-  const serializedGame = parseGameFormValuesToBackendFormat(gameFormValues);
+  const serializedGame = parseGameFormValuesToBackendFormat(
+    gameFormValues,
+    author_uid
+  );
   console.log(`Updating "${serializedGame.title}"`);
   const docRef = await updateDoc(doc(db, "games", id), serializedGame);
   console.log(`Update for "${serializedGame.title}" successful`);

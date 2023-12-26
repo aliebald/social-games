@@ -1,4 +1,4 @@
-import Game from "@/types/game";
+import Game, { BackendGame, BackendGameWithoutId } from "@/types/game";
 import { GameFormValues } from "./gameForm";
 import { doc } from "firebase/firestore";
 import { db } from "@/firebase";
@@ -11,10 +11,12 @@ export function parseGameToGameFormValues(game: Game): GameFormValues {
 }
 
 export function parseGameFormValuesToBackendFormat(
-  gameFormValues: GameFormValues
+  gameFormValues: GameFormValues,
+  author_uid: string
 ) {
   return {
     ...gameFormValues,
+    author_uid,
     tags: gameFormValues.tags.map((tagId) => doc(db, `tags/${tagId}`)),
-  };
+  } satisfies BackendGame | BackendGameWithoutId;
 }

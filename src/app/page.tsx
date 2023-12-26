@@ -11,21 +11,28 @@ import { getRandomArrayElements } from "@/util";
 import fetchGames from "@/networking/fetchGames";
 import deleteGame from "@/networking/deleteGame";
 import deleteTag from "@/networking/deleteTag";
+import useUser from "@/networking/useUser";
 
 export default function Home() {
+  const user = useUser();
   const addTestdata = async () => {
+    if (user === null) return;
+
     console.log("Adding Testdata to database...");
 
-    await Promise.all(testTags.map((tag) => addTag(tag)));
+    await Promise.all(testTags.map((tag) => addTag(tag, user.uid)));
     const tags = await fetchTags();
     console.log("tags", tags);
 
     await Promise.all(
       testGames.map((game) =>
-        addGame({
-          ...game,
-          tags: getRandomArrayElements(tags, 4).map((tag) => tag.id),
-        })
+        addGame(
+          {
+            ...game,
+            tags: getRandomArrayElements(tags, 4).map((tag) => tag.id),
+          },
+          user.uid
+        )
       )
     );
     console.log("Successfully added testdata");

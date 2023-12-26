@@ -1,7 +1,7 @@
 import { GameWithoutId } from "./types/game";
 import Tag from "./types/tag";
 
-export const testGames: GameWithoutId[] = [
+export const testGames: Omit<GameWithoutId, "author_uid">[] = [
   {
     title: "Gartic Phone",
     description: "Stille-Post-Onlinespiel",
@@ -109,15 +109,13 @@ export const testGames: GameWithoutId[] = [
   },
 ];
 
-export const testTags: Tag[] = [
+export const testTags: Omit<Tag, "id" | "author_uid">[] = [
   {
-    id: "T01",
     title: "Draw",
     description: "Game includes drawing",
     color: "#37B24D",
   },
   {
-    id: "T02",
     title: "Social Deduction",
     description:
       "A social deduction game is a game in which players attempt to uncover each other's " +
@@ -126,35 +124,29 @@ export const testTags: Tag[] = [
     color: "#AE3EC9",
   },
   {
-    id: "T03",
     title: "Card Game",
     description: "Games based on various decks of cards",
   },
   {
-    id: "T04",
     title: "Board Game Arena",
     description: "This game can be found on the Board Game Arena",
     color: "#E67700",
   },
   {
-    id: "T05",
     title: "Classic",
     description: "Everybody needs to know this",
     color: "#0CA678",
   },
   {
-    id: "T06",
     title: "Long",
     description: "This game might take a while",
   },
   {
-    id: "T07",
     title: "Short",
     description: "Suitable for short rounds.",
     color: "#748FFC",
   },
   {
-    id: "T08",
     title: "Beginner Friendly",
     description: "Suitable for new players.",
     color: "#9775FA",

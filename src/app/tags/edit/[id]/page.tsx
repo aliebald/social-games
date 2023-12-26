@@ -7,6 +7,7 @@ import { showLoadingNotification } from "@/molecules/loadingNotification/loading
 import TagForm, { TagFormValues } from "@/organisms/tagForm/tagForm";
 import useTag from "@/networking/useTag";
 import updateTag from "@/networking/updateTag";
+import useUser from "@/networking/useUser";
 
 interface EditTagPageProps {
   params: { id: string };
@@ -14,6 +15,7 @@ interface EditTagPageProps {
 
 export default function EditTagPage({ params }: EditTagPageProps) {
   const tag = useTag(params.id);
+  const user = useUser();
   const [initialTagFormValues, setInitialTagFormValues] =
     useState<TagFormValues | null>(null);
 
@@ -28,8 +30,16 @@ export default function EditTagPage({ params }: EditTagPageProps) {
       message: `Updating ${tagFormValues.title}`,
     });
 
+    if (user === null) {
+      errorNotification({
+        title: "Error",
+        message: `Failed to update ${tagFormValues.title}. Please log in and try again.`,
+      });
+      return;
+    }
+
     try {
-      await updateTag(params.id, tagFormValues);
+      await updateTag(params.id, tagFormValues, user.uid);
     } catch (error) {
       console.error("Failed to update game. Error:", error);
       errorNotification({
