@@ -11,7 +11,7 @@ export default function CreateGamePage() {
 
   const onSubmit = async (gameFormValues: GameFormValues) => {
     const { successNotification, errorNotification } = showLoadingNotification({
-      title: "Saving Game",
+      title: "Saving game",
       message: `Saving ${gameFormValues.title}`,
     });
 

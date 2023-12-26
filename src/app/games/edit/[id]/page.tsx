@@ -25,7 +25,7 @@ export default function EditGamePage({ params }: EditGamePageProps) {
 
   const onSubmit = async (gameFormValues: GameFormValues) => {
     const { successNotification, errorNotification } = showLoadingNotification({
-      title: "Updating Game",
+      title: "Updating game",
       message: `Updating ${gameFormValues.title}`,
     });
 

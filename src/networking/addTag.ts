@@ -1,12 +1,11 @@
-import Tag, { TagWithoutId } from "@/types/tag";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "@/firebase";
-import { omit } from "lodash";
+import { TagFormValues } from "@/organisms/tagForm/tagForm";
 
-export default async function addTag(tag: Tag | TagWithoutId) {
+export default async function addTag(tag: TagFormValues) {
   console.log("Adding tag", tag);
-  const docRef = await addDoc(collection(db, "tags"), omit(tag, "id"));
+  const docRef = await addDoc(collection(db, "tags"), tag);
 
   console.log("Added tag with ID:", docRef.id);
-  return docRef;
+  return docRef.id;
 }

@@ -17,7 +17,7 @@ export default function TagsPage() {
         </Title>
         <LinkIconWithTooltip
           tooltip="Create new Tag"
-          href="#"
+          href="tags/create"
           Icon={IconPlus}
           size="lg"
         />
