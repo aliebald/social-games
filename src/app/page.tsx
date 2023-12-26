@@ -16,7 +16,7 @@ export default function Home() {
   const addTestdata = async () => {
     console.log("Adding Testdata to database...");
 
-    await Promise.all(testTags.map(async (tag) => (await addTag(tag)).id));
+    await Promise.all(testTags.map((tag) => addTag(tag)));
     const tags = await fetchTags();
     console.log("tags", tags);
 
