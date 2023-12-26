@@ -9,7 +9,7 @@ export default function Header() {
       <Container size="md" className={styles.headerContainer}>
         <Group gap={5} align="center" className={styles.group}>
           <HeaderLink href="/" label="Home" />
-          <HeaderLink href="/games/list" label="Games" />
+          <HeaderLink href="/games" label="Games" />
           <HeaderLink href="/tags" label="Tags" />
           <HeaderLink
             href="/games/create"

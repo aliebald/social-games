@@ -59,7 +59,7 @@ export default function Home() {
       </Title>
       <Text pt="md">
         This site is still in early development. At the moment, you can view a
-        games list <Anchor href="/games/list">here</Anchor>
+        games list <Anchor href="/games">here</Anchor>
       </Text>
       <Title size="h2" order={2} pt="xl" pb="md">
         Danger Zone
