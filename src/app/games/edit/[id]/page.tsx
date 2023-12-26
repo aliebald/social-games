@@ -5,7 +5,7 @@ import { Container, LoadingOverlay, Title, Text, Divider } from "@mantine/core";
 import styles from "./page.module.css";
 import updateGame from "@/networking/updateGame";
 import useGame from "@/networking/useGame";
-import { useMemo } from "react";
+import { useEffect, useState } from "react";
 import { parseGameToGameFormValues } from "@/organisms/gameForm/util";
 import { showLoadingNotification } from "@/molecules/loadingNotification/loadingNotification";
 
@@ -15,10 +15,13 @@ interface EditGamePageProps {
 
 export default function EditGamePage({ params }: EditGamePageProps) {
   const game = useGame(params.id);
-  const gameFormValues = useMemo(
-    () => (game ? parseGameToGameFormValues(game) : null),
-    [game]
-  );
+  const [initialGameFormValues, setInitialGameFormValues] =
+    useState<GameFormValues | null>(null);
+
+  useEffect(() => {
+    if (game === null) return;
+    setInitialGameFormValues(parseGameToGameFormValues(game));
+  }, [game]);
 
   const onSubmit = async (gameFormValues: GameFormValues) => {
     const { successNotification, errorNotification } = showLoadingNotification({
@@ -55,7 +58,7 @@ export default function EditGamePage({ params }: EditGamePageProps) {
         <Title pb="sm">Edit {game?.title}</Title>
         <Text>Edit an existing title.</Text>
         <Divider my="md" />
-        <GameForm initialValues={gameFormValues} onSubmit={onSubmit} />
+        <GameForm initialValues={initialGameFormValues} onSubmit={onSubmit} />
       </Container>
     </>
   );

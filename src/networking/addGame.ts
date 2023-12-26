@@ -10,4 +10,5 @@ export default async function addGame(gameFormValues: GameFormValues) {
   const docRef = await addDoc(collection(db, "games"), serializedGame);
 
   console.log("Added game with ID:", docRef.id);
+  return docRef.id;
 }

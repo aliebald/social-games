@@ -11,7 +11,7 @@ import {
   SimpleGrid,
 } from "@mantine/core";
 import Game from "@/types/game";
-import { isEqual, omit } from "lodash";
+import { omit } from "lodash";
 import { useEffect, useRef } from "react";
 import TagsInput from "@/molecules/tagsInput/tagsInput";
 
@@ -53,9 +53,7 @@ export default function GameForm({ initialValues, onSubmit }: GameFormProps) {
 
   useEffect(() => {
     const form = formRef.current;
-    if (initialValues && !isEqual(initialValues, form.values)) {
-      console.log("Update form values based on initialValues");
-
+    if (initialValues) {
       form.setInitialValues(initialValues);
       form.setValues(initialValues);
     }

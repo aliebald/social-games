@@ -4,8 +4,11 @@ import { showLoadingNotification } from "@/molecules/loadingNotification/loading
 import addGame from "@/networking/addGame";
 import GameForm, { GameFormValues } from "@/organisms/gameForm/gameForm";
 import { Container, Title, Text, Divider } from "@mantine/core";
+import { useRouter } from "next/navigation";
 
 export default function CreateGamePage() {
+  const router = useRouter();
+
   const onSubmit = async (gameFormValues: GameFormValues) => {
     const { successNotification, errorNotification } = showLoadingNotification({
       title: "Saving Game",
@@ -13,7 +16,12 @@ export default function CreateGamePage() {
     });
 
     try {
-      await addGame(gameFormValues);
+      const gameId = await addGame(gameFormValues);
+      successNotification({
+        title: "Success",
+        message: `Successfully saved ${gameFormValues.title}`,
+      });
+      router.push(`/games/edit/${gameId}`);
     } catch (error) {
       console.error("Failed to add game. Error:", error);
       errorNotification({
@@ -22,11 +30,6 @@ export default function CreateGamePage() {
       });
       return;
     }
-
-    successNotification({
-      title: "Success",
-      message: `Successfully saved ${gameFormValues.title}`,
-    });
   };
 
   return (
