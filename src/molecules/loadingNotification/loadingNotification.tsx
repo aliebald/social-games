@@ -31,7 +31,8 @@ export function showLoadingNotification(
       color: "teal",
       icon: <IconCheck className={styles.icon} />,
       loading: false,
-      autoClose: 2000,
+      autoClose: 5000,
+      withCloseButton: true,
     });
   };
 
@@ -45,6 +46,7 @@ export function showLoadingNotification(
       icon: <IconX className={styles.icon} />,
       loading: false,
       autoClose: 5000,
+      withCloseButton: true,
     });
   };
 

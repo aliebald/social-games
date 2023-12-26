@@ -6,6 +6,7 @@ import { IconLogout, IconTrash } from "@tabler/icons-react";
 import useUser from "@/networking/useUser";
 import LoginModal from "@/organisms/loginModal/loginModal";
 import { useState } from "react";
+import { showLoadingNotification } from "../loadingNotification/loadingNotification";
 
 export default function UserMenu() {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -69,27 +70,47 @@ export default function UserMenu() {
 
 function logout() {
   const auth = getAuth();
+
+  const { successNotification, errorNotification } = showLoadingNotification({
+    title: "Logging out",
+    message: null,
+  });
+
   signOut(auth)
     .then(() => {
       console.log("Logged out");
+      successNotification({ title: "Logged out", message: null });
     })
     .catch((error) => {
       console.warn("Failed sign out", error);
+      errorNotification({ title: "Error", message: "Failed to sign out" });
     });
 }
 
 function deleteAccount(user: User) {
   if (
-    window.confirm(
+    !window.confirm(
       "Do you really want to delete your account? This cannot be undone."
     )
   ) {
-    deleteUser(user)
-      .then(() => {
-        console.log("User deleted");
-      })
-      .catch((error) => {
-        console.warn("Failed to delete user", error);
-      });
+    return;
   }
+
+  const { successNotification, errorNotification } = showLoadingNotification({
+    title: "Deleting account",
+    message: null,
+  });
+
+  deleteUser(user)
+    .then(() => {
+      console.log("User deleted");
+      successNotification({ title: "Account deleted", message: null });
+    })
+    .catch((error) => {
+      console.warn("Failed to delete user", error);
+      errorNotification({
+        title: "Error",
+        message: "Failed to delete account",
+      });
+    });
 }
