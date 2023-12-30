@@ -10,7 +10,7 @@ export default async function updateTag(
 ) {
   const tag: Omit<Tag, "id"> = { ...tagFormValues, author_uid };
   console.log(`Updating "${tag.title}"`);
-  const docRef = await updateDoc(doc(db, "games", id), tag);
+  const docRef = await updateDoc(doc(db, "tags", id), tag);
   console.log(`Update for "${tag.title}" successful`);
   return docRef;
 }
