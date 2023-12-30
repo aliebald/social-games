@@ -29,6 +29,10 @@ export default function Home() {
         addGame(
           {
             ...game,
+            existingThumbnailName: null,
+            existingThumbnailUrl: null,
+            existingThumbnailPath: null,
+            newThumbnail: null,
             tags: getRandomArrayElements(tags, 4).map((tag) => tag.id),
           },
           user.uid

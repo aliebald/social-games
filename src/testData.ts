@@ -1,7 +1,12 @@
 import { GameWithoutId } from "./types/game";
 import Tag from "./types/tag";
 
-export const testGames: Omit<GameWithoutId, "author_uid">[] = [
+interface TestDataGame
+  extends Omit<GameWithoutId, "author_uid" | "thumbnailUrl" | "thumbnailRef"> {
+  image: string;
+}
+
+export const testGames: TestDataGame[] = [
   {
     title: "Gartic Phone",
     description: "Stille-Post-Onlinespiel",

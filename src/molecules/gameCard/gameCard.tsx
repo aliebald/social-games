@@ -19,7 +19,7 @@ export default function GameCard({ game, openDetails }: GameCardProps) {
     <Card withBorder radius="md" p="md">
       <Card.Section onClick={openDetails} className={styles.clickable}>
         <Image
-          src={game.image}
+          src={game.thumbnailUrl}
           alt={game.title}
           fallbackSrc={`https://placehold.co/300x200?text=${game.title}`}
           height={180}

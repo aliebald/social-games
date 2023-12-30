@@ -9,15 +9,24 @@ import {
   Textarea,
   NumberInput,
   SimpleGrid,
+  FileInput,
 } from "@mantine/core";
 import Game from "@/types/game";
 import { omit } from "lodash";
 import { useEffect, useRef } from "react";
 import TagsInput from "@/molecules/tagsInput/tagsInput";
+import Anchor from "@/atoms/anchor/anchor";
 
 export interface GameFormValues
-  extends Omit<Game, "tags" | "id" | "author_uid"> {
+  extends Omit<
+    Game,
+    "tags" | "id" | "author_uid" | "thumbnailUrl" | "thumbnailRef"
+  > {
   tags: string[];
+  existingThumbnailName: string | null;
+  existingThumbnailUrl: string | null;
+  existingThumbnailPath: string | null;
+  newThumbnail: File | null;
 }
 
 interface GameFormProps {
@@ -29,8 +38,11 @@ const defaultInitialValues: GameFormValues = {
   title: "",
   description: "",
   websiteUrl: "",
-  image: "",
   tags: [],
+  existingThumbnailName: null,
+  existingThumbnailUrl: null,
+  existingThumbnailPath: null,
+  newThumbnail: null,
 };
 
 export default function GameForm({ initialValues, onSubmit }: GameFormProps) {
@@ -59,6 +71,9 @@ export default function GameForm({ initialValues, onSubmit }: GameFormProps) {
       form.setValues(initialValues);
     }
   }, [initialValues]);
+
+  const existingThumbnailName = form.values.existingThumbnailName;
+  const existingThumbnailUrl = form.values.existingThumbnailUrl;
 
   return (
     <form onSubmit={form.onSubmit(onSubmit)}>
@@ -92,7 +107,23 @@ export default function GameForm({ initialValues, onSubmit }: GameFormProps) {
             {...form.getInputProps("maxPlayers")}
           />
         </SimpleGrid>
-        <TextInput label="Preview image url" {...form.getInputProps("image")} />
+        <FileInput
+          accept="image/png,image/jpeg"
+          label="Thumbnail image"
+          placeholder={existingThumbnailName ?? undefined}
+          description={
+            existingThumbnailName && existingThumbnailUrl ? (
+              <>
+                Replaces{" "}
+                <Anchor size="xs" href={existingThumbnailUrl} openInNewTab>
+                  {existingThumbnailName}
+                </Anchor>
+              </>
+            ) : undefined
+          }
+          clearable
+          {...form.getInputProps("newThumbnail")}
+        />
       </Flex>
       <Group justify="flex-end" mt="md">
         <Button type="submit" disabled={!form.isDirty()}>

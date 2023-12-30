@@ -5,12 +5,15 @@ import {
   getDoc,
 } from "firebase/firestore";
 import Tag, { deserializeTag } from "./tag";
+import { StorageReference, getDownloadURL, ref } from "firebase/storage";
+import { storage } from "@/firebase";
 export default interface Game {
   id: string;
   title: string;
   description: string;
   websiteUrl: string;
-  image: string;
+  thumbnailUrl: string | null;
+  thumbnailRef: StorageReference | null;
   tags: Tag[];
   minPlayers?: number;
   maxPlayers?: number;
@@ -19,32 +22,35 @@ export default interface Game {
 
 export type GameWithoutId = Omit<Game, "id">;
 
-export interface BackendGame extends Omit<Game, "tags"> {
+export interface BackendGame
+  extends Omit<Game, "tags" | "thumbnail" | "thumbnailUrl" | "thumbnailRef"> {
   tags: DocumentReference<DocumentData, DocumentData>[];
+  thumbnailPath: string | null;
 }
 
-export interface BackendGameWithoutId extends Omit<GameWithoutId, "tags"> {
-  tags: DocumentReference<DocumentData, DocumentData>[];
-}
+export interface BackendGameWithoutId extends Omit<BackendGame, "id"> {}
 
 // ========================================
 //       De-/ Serialization Methods
 // ========================================
 
-const defaultGame: Omit<Game, "id"> = {
+const defaultGame: GameWithoutId = {
   title: "",
   description: "",
   websiteUrl: "",
-  image: "",
   tags: [],
   author_uid: "unknown",
+  thumbnailRef: null,
+  thumbnailUrl: null,
 };
 
 /** Parse game from backend */
 export async function deserializeGame(
   backendSnapshot: QueryDocumentSnapshot<DocumentData, DocumentData>
 ): Promise<Game> {
-  const { tags: tagRefs, ...data } = backendSnapshot.data();
+  console.log("deserialize", backendSnapshot.data());
+
+  const { tags: tagRefs, thumbnailPath, ...data } = backendSnapshot.data();
 
   const tags = await Promise.all(
     (tagRefs as DocumentReference<DocumentData, DocumentData>[]).map(
@@ -55,10 +61,17 @@ export async function deserializeGame(
     )
   );
 
+  const thumbnailRef =
+    thumbnailPath != null ? ref(storage, thumbnailPath) : null;
+  const thumbnailUrl =
+    thumbnailRef !== null ? await getDownloadURL(thumbnailRef) : null;
+
   return {
     ...defaultGame,
     ...data,
     id: backendSnapshot.id,
     tags,
+    thumbnailUrl,
+    thumbnailRef,
   };
 }

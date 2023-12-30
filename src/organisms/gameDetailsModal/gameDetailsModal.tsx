@@ -30,7 +30,7 @@ export default function GameDetailsModal({
       <Modal.Content>
         <Modal.CloseButton className={styles.closeBtn} variant="outlined" />
         <Image
-          src={game.image}
+          src={game.thumbnailUrl}
           alt={game.title}
           fallbackSrc={`https://placehold.co/300x200?text=${game.title}`}
           height={200}
