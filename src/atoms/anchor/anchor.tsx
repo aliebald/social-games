@@ -9,11 +9,14 @@ interface AnchorProps
   extends MantineAnchorProps,
     ElementProps<"a", keyof MantineAnchorProps> {
   href: string;
+  openInNewTab?: boolean;
 }
 
 /**
  * Combines {@link MantineAnchor Mantine Anchor} with {@link Link NextJs Link}
  */
-export default function Anchor(props: AnchorProps) {
-  return <MantineAnchor component={Link} {...props} />;
+export default function Anchor({ openInNewTab, ...props }: AnchorProps) {
+  const extProps = openInNewTab ? { target: "_blank", rel: "noopener" } : {};
+
+  return <MantineAnchor component={Link} {...extProps} {...props} />;
 }
