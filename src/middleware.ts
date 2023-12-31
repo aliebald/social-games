@@ -5,8 +5,6 @@ export const config = {
 };
 
 export function middleware(req: NextRequest) {
-  console.log(typeof process.env.BASIC_AUTH_USER);
-
   const basicAuth = req.headers.get("authorization");
   const url = req.nextUrl;
 
