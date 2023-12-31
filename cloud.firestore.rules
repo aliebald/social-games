@@ -21,7 +21,7 @@ service cloud.firestore {
     }
 
     function isDocumentOwner() {
-      return getResourceData().author_uid == request.auth.uid;
+      return getResourceData().authorUid == request.auth.uid;
     }
 
     function getResourceData() {

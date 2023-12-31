@@ -6,9 +6,9 @@ import Tag from "@/types/tag";
 export default async function updateTag(
   id: string,
   tagFormValues: TagFormValues,
-  author_uid: string
+  authorUid: string
 ) {
-  const tag: Omit<Tag, "id"> = { ...tagFormValues, author_uid };
+  const tag: Omit<Tag, "id"> = { ...tagFormValues, authorUid };
   console.log(`Updating "${tag.title}"`);
   const docRef = await updateDoc(doc(db, "tags", id), tag);
   console.log(`Update for "${tag.title}" successful`);

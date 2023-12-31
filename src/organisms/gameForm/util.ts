@@ -25,7 +25,7 @@ export function parseGameToGameFormValues(game: Game): GameFormValues {
 
 export function parseGameFormValuesToBackendFormat(
   gameFormValues: GameFormValues,
-  author_uid: string,
+  authorUid: string,
   thumbnail?: UploadResult
 ) {
   return {
@@ -37,7 +37,7 @@ export function parseGameFormValuesToBackendFormat(
       "minPlayers",
       "maxPlayers"
     ),
-    author_uid,
+    authorUid,
     tags: gameFormValues.tags.map((tagId) => doc(db, `tags/${tagId}`)),
     thumbnailPath:
       thumbnail?.ref.fullPath ?? gameFormValues.existingThumbnailPath,

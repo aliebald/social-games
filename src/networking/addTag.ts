@@ -5,9 +5,9 @@ import { TagWithoutId } from "@/types/tag";
 
 export default async function addTag(
   tagFormValues: TagFormValues,
-  author_uid: string
+  authorUid: string
 ) {
-  const tag: TagWithoutId = { ...tagFormValues, author_uid };
+  const tag: TagWithoutId = { ...tagFormValues, authorUid };
   console.log("Adding tag", tag);
   const docRef = await addDoc(collection(db, "tags"), tag);
 

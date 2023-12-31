@@ -30,7 +30,7 @@ const tagSampleColors = [
   "#fd7e14",
 ];
 
-export type TagFormValues = Omit<Tag, "id" | "author_uid">;
+export type TagFormValues = Omit<Tag, "id" | "authorUid">;
 
 interface TagFormProps {
   initialValues?: TagFormValues | null;

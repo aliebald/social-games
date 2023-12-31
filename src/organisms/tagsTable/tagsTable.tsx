@@ -17,7 +17,7 @@ export default function TagsTable({ tags }: TagsTableProps) {
   const user = useUser();
 
   const rows = tags.map((tag) => {
-    const canEdit = user !== null && tag.author_uid === user.uid;
+    const canEdit = user !== null && tag.authorUid === user.uid;
     return (
       <Table.Tr
         key={tag.id}

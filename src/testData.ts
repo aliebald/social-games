@@ -2,7 +2,7 @@ import { GameWithoutId } from "./types/game";
 import Tag from "./types/tag";
 
 interface TestDataGame
-  extends Omit<GameWithoutId, "author_uid" | "thumbnailUrl" | "thumbnailRef"> {
+  extends Omit<GameWithoutId, "authorUid" | "thumbnailUrl" | "thumbnailRef"> {
   image: string;
 }
 
@@ -114,7 +114,7 @@ export const testGames: TestDataGame[] = [
   },
 ];
 
-export const testTags: Omit<Tag, "id" | "author_uid">[] = [
+export const testTags: Omit<Tag, "id" | "authorUid">[] = [
   {
     title: "Draw",
     description: "Game includes drawing",

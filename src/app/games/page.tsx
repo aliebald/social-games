@@ -27,7 +27,7 @@ export default function GamesPage() {
       {gameDetails !== null && (
         <GameDetailsModal
           game={gameDetails}
-          canEdit={user !== null && user.uid === gameDetails.author_uid}
+          canEdit={user !== null && user.uid === gameDetails.authorUid}
           open={gameDetailsOpen}
           close={() => setGameDetailsOpen(false)}
         />

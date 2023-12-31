@@ -7,7 +7,7 @@ import { uploadThumbnail } from "./uploadThumbnail";
 
 export default async function addGame(
   gameFormValues: GameFormValues,
-  author_uid: string
+  authorUid: string
 ) {
   console.log("Adding game", gameFormValues);
 
@@ -19,13 +19,13 @@ export default async function addGame(
     thumbnailUploadResult = await uploadThumbnail(
       gameFormValues.newThumbnail,
       gameId,
-      author_uid
+      authorUid
     );
   }
 
   const serializedGame = parseGameFormValuesToBackendFormat(
     gameFormValues,
-    author_uid,
+    authorUid,
     thumbnailUploadResult
   );
 
