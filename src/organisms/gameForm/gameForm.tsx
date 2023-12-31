@@ -45,6 +45,9 @@ const defaultInitialValues: GameFormValues = {
   newThumbnail: null,
 };
 
+const bytesInMb = 1024 * 1024;
+const maxThumbnailSize = 5 * bytesInMb;
+
 export default function GameForm({ initialValues, onSubmit }: GameFormProps) {
   const form = useForm<GameFormValues>({
     validateInputOnBlur: true,
@@ -56,6 +59,12 @@ export default function GameForm({ initialValues, onSubmit }: GameFormProps) {
       ),
       description: isNotEmpty("Enter a game description"),
       websiteUrl: isNotEmpty("Enter a url that leads to the games website"),
+      newThumbnail: (value) =>
+        value !== null && value.size >= maxThumbnailSize
+          ? `Thumbnail file size must be bellow 5MB (current: ${
+              Math.ceil((value.size / bytesInMb) * 100) / 100
+            }MB)`
+          : null,
     },
   });
 
