@@ -8,8 +8,8 @@ export function middleware(req: NextRequest) {
   const basicAuth = req.headers.get("authorization");
   const url = req.nextUrl;
 
-  const validUser = process.env.BASIC_AUTH_USER;
-  const validPassWord = process.env.BASIC_AUTH_PASSWORD;
+  const validUser = process.env.BASIC_AUTH_USER ?? "";
+  const validPassWord = process.env.BASIC_AUTH_PASSWORD ?? "";
   const doesNotUseBasicAuth = validUser === "" && validPassWord === "";
 
   if (doesNotUseBasicAuth) {

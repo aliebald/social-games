@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
 
 export async function GET() {
-  const validUser = process.env.BASIC_AUTH_USER;
-  const validPassWord = process.env.BASIC_AUTH_PASSWORD;
+  const validUser = process.env.BASIC_AUTH_USER ?? "";
+  const validPassWord = process.env.BASIC_AUTH_PASSWORD ?? "";
   const doesNotUseBasicAuth = validUser === "" && validPassWord === "";
 
   if (doesNotUseBasicAuth) {
