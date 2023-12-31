@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "csstools.postcss",
+    "esbenp.prettier-vscode",
+    "toba.vsfire",
+    "streetsidesoftware.code-spell-checker",
+    "yoavbls.pretty-ts-errors",
+    "mikestead.dotenv"
+  ]
+}
