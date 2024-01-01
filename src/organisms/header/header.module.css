@@ -7,7 +7,7 @@
     var(--mantine-color-dark-6)
   );
   box-shadow: var(--mantine-shadow-lg);
-  z-index: 100;
+  z-index: calc(var(--mantine-z-index-app) + 1);
 }
 
 .headerContainer {
