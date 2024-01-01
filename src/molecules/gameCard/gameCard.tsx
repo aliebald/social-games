@@ -2,12 +2,13 @@
 
 import styles from "./gameCard.module.css";
 import Game from "@/types/game";
-import { Card, Group, Image, Text } from "@mantine/core";
+import { Card, Group, Text } from "@mantine/core";
 import { IconWorld } from "@tabler/icons-react";
 import React from "react";
 import LinkIconWithTooltip from "../linkIconWithTooltip/linkIconWithTooltip";
 import PlayerCount from "@/atoms/playerCount/playerCount";
 import Tags from "../tags/tags";
+import GameImageWithFallback from "@/atoms/gameImageWithFallback/gameImageWithFallback";
 
 interface GameCardProps {
   game: Game;
@@ -18,12 +19,7 @@ export default function GameCard({ game, openDetails }: GameCardProps) {
   return (
     <Card withBorder radius="md" p="md">
       <Card.Section onClick={openDetails} className={styles.clickable}>
-        <Image
-          src={game.thumbnailUrl}
-          alt={game.title}
-          fallbackSrc={`https://placehold.co/300x200?text=${game.title}`}
-          height={180}
-        />
+        <GameImageWithFallback game={game} height={180} />
       </Card.Section>
       <Card.Section p="xs">
         <Group justify="space-between" gap={0}>

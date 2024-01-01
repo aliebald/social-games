@@ -1,10 +1,11 @@
 import styles from "./gameDetailsModal.module.css";
 import Game from "@/types/game";
-import { Group, Image, Modal, Text, Title, Flex, Divider } from "@mantine/core";
+import { Group, Modal, Text, Title, Flex, Divider } from "@mantine/core";
 import { IconWorld, IconPencil } from "@tabler/icons-react";
 import LinkIconWithTooltip from "@/molecules/linkIconWithTooltip/linkIconWithTooltip";
 import PlayerCount from "@/atoms/playerCount/playerCount";
 import Tags from "@/molecules/tags/tags";
+import GameImageWithFallback from "@/atoms/gameImageWithFallback/gameImageWithFallback";
 
 interface GameDetailsModalProps {
   game: Game;
@@ -29,16 +30,10 @@ export default function GameDetailsModal({
       <Modal.Overlay backgroundOpacity={0.5} blur={2} />
       <Modal.Content>
         <Modal.CloseButton className={styles.closeBtn} variant="outlined" />
-        <Image
-          src={game.thumbnailUrl}
-          alt={game.title}
-          fallbackSrc={`https://placehold.co/300x200?text=${game.title}`}
-          height={200}
-          className={styles.img}
-        />
+        <GameImageWithFallback game={game} height={200} />
         <Modal.Body pt="md">
           <Flex justify="space-between" gap="xs" wrap="wrap">
-            <Title size="h1" fw={500}>
+            <Title size="h1" order={3} fw={500}>
               {game.title}
             </Title>
             <Group gap="xs">
@@ -62,7 +57,7 @@ export default function GameDetailsModal({
             maxPlayers={game.maxPlayers}
           />
           <Tags tags={game.tags} pt="sm" />
-          <Divider my="sm" />
+          <Divider my="sm" color="dark.4" />
           <Text fz="sm">{game.description}</Text>
         </Modal.Body>
       </Modal.Content>
