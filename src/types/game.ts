@@ -48,8 +48,6 @@ const defaultGame: GameWithoutId = {
 export async function deserializeGame(
   backendSnapshot: QueryDocumentSnapshot<DocumentData, DocumentData>
 ): Promise<Game> {
-  console.log("deserialize", backendSnapshot.data());
-
   const { tags: tagRefs, thumbnailPath, ...data } = backendSnapshot.data();
 
   const tags = await Promise.all(
@@ -60,18 +58,34 @@ export async function deserializeGame(
       }
     )
   );
-
-  const thumbnailRef =
-    thumbnailPath != null ? ref(storage, thumbnailPath) : null;
-  const thumbnailUrl =
-    thumbnailRef !== null ? await getDownloadURL(thumbnailRef) : null;
-
+  const thumbnail = await parseThumbnail(thumbnailPath);
   return {
     ...defaultGame,
     ...data,
+    ...thumbnail,
     id: backendSnapshot.id,
     tags,
-    thumbnailUrl,
-    thumbnailRef,
   };
+}
+
+async function parseThumbnail(thumbnailPath: unknown) {
+  const fallback = { thumbnailUrl: null, thumbnailRef: null };
+
+  if (thumbnailPath === null) return fallback;
+
+  if (typeof thumbnailPath !== "string") {
+    console.error(
+      `Expected thumbnailPath to be of type string, but is: "${typeof thumbnailPath}"`
+    );
+    return fallback;
+  }
+
+  try {
+    const thumbnailRef = ref(storage, thumbnailPath);
+    const thumbnailUrl = await getDownloadURL(thumbnailRef);
+    return { thumbnailUrl, thumbnailRef };
+  } catch (error) {
+    console.error("Failed to get thumbnail:", error);
+    return fallback;
+  }
 }
