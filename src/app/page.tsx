@@ -1,7 +1,6 @@
 "use client";
 
 import { Container, Title, Text, Button } from "@mantine/core";
-import styles from "./page.module.css";
 import Anchor from "@/atoms/anchor/anchor";
 import { testGames, testTags } from "@/testData";
 import addGame from "@/networking/addGame";

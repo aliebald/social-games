@@ -1,0 +1,20 @@
+.mainLayout {
+  height: 100%;
+  display: grid;
+  grid-template-rows: rem(56px) auto;
+  grid-template-areas:
+    "header"
+    "main-content";
+}
+
+.header {
+  grid-area: "header";
+}
+
+.content {
+  overflow: hidden;
+  grid-area: main-content;
+  overflow-y: auto;
+  padding-top: var(--mantine-spacing-md);
+  padding-bottom: var(--mantine-spacing-md);
+}

@@ -3,10 +3,15 @@ import styles from "./header.module.css";
 import HeaderLink from "@/atoms/headerLink/headerLink";
 import UserMenu from "@/molecules/userMenu/userMenu";
 import AddEntityLinksMenu from "@/molecules/addEntityLinksMenu/addEntityLinksMenu";
+import classNames from "classnames";
 
-export default function Header() {
+interface HeaderProps {
+  className?: string;
+}
+
+export default function Header({ className }: HeaderProps) {
   return (
-    <header className={styles.outerWrapper}>
+    <header className={classNames(styles.outerWrapper, className)}>
       <Container size="md" className={styles.headerContainer}>
         <Group gap={5} align="center" className={styles.group}>
           <HeaderLink href="/" label="Home" />

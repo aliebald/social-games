@@ -2,6 +2,7 @@ import "./globals.css";
 import "@mantine/core/styles.css";
 import "@mantine/notifications/styles.css";
 
+import styles from "./layout.module.css";
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -24,15 +25,17 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en">
       <head>
         <ColorSchemeScript />
-        <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
       </head>
       <body>
-        <Analytics />
-        <SpeedInsights />
         <MantineProvider theme={theme} defaultColorScheme="dark">
+          <Analytics />
+          <SpeedInsights />
           <Notifications position="bottom-right" />
-          <Header />
-          {children}
+          <div className={styles.mainLayout}>
+            <Header className={styles.header} />
+            <div className={styles.content}>{children}</div>
+          </div>
         </MantineProvider>
       </body>
     </html>
