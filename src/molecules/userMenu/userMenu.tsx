@@ -1,9 +1,9 @@
 "use client";
 
-import { User, deleteUser, getAuth, signOut } from "firebase/auth";
+import { deleteUser, getAuth, signOut } from "firebase/auth";
 import { Menu, rem, Avatar, Button } from "@mantine/core";
 import { IconLogout, IconTrash } from "@tabler/icons-react";
-import useUser from "@/networking/useUser";
+import useUser, { User } from "@/networking/useUser";
 import LoginModal from "@/organisms/loginModal/loginModal";
 import { useState } from "react";
 import { showLoadingNotification } from "../loadingNotification/loadingNotification";
@@ -32,7 +32,7 @@ export default function UserMenu() {
   }
 
   return (
-    <Menu shadow="md" width={200}>
+    <Menu shadow="md">
       <Menu.Target>
         <Avatar color="cyan" radius="xl">
           {user.displayName?.substring(0, 2)}
@@ -40,7 +40,10 @@ export default function UserMenu() {
       </Menu.Target>
 
       <Menu.Dropdown>
-        <Menu.Label>Welcome {user.displayName}</Menu.Label>
+        <Menu.Label>
+          Welcome {user.displayName}
+          {user.admin ? " [admin]" : ""}
+        </Menu.Label>
         <Menu.Item
           // color="green"
           leftSection={

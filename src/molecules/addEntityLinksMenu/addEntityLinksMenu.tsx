@@ -14,7 +14,7 @@ export default function AddEntityLinksMenu({}: AddHeaderMenuProps) {
   if (user === null) return <></>;
 
   return (
-    <Menu shadow="md" width={200}>
+    <Menu shadow="md">
       <Menu.Target>
         <ActionIcon
           variant="light"
