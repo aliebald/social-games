@@ -44,7 +44,12 @@ export default function GameCard({ game, openDetails }: GameCardProps) {
           minPlayers={game.minPlayers}
           maxPlayers={game.maxPlayers}
         />
-        <Tags tags={game.tags} size="xs" my="xs" />
+        <Tags
+          tags={game.tags}
+          size="xs"
+          pt={game.tags.length > 0 ? "xs" : undefined}
+          pb={"xs"}
+        />
         <Text fz="sm" lineClamp={3}>
           {game.description}
         </Text>

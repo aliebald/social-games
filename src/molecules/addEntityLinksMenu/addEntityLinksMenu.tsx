@@ -18,13 +18,13 @@ export default function AddEntityLinksMenu({}: AddHeaderMenuProps) {
       <Menu.Target>
         <ActionIcon
           variant="light"
-          size="lg"
-          radius="lg"
+          size="md"
+          radius="md"
           aria-label="Add game or tag menu"
           color="cyan"
           className={styles.iconButton}
         >
-          <IconPlus style={{ width: "85%", height: "85%" }} stroke={1.5} />
+          <IconPlus style={{ width: "85%", height: "85%" }} stroke={1.7} />
         </ActionIcon>
       </Menu.Target>
 
@@ -37,14 +37,14 @@ export default function AddEntityLinksMenu({}: AddHeaderMenuProps) {
             <IconDeviceGamepad2 style={{ width: rem(14), height: rem(14) }} />
           }
         >
-          Add new game
+          Add Game
         </Menu.Item>
         <Menu.Item
           component={Link}
           href="/tags/create"
           leftSection={<IconTag style={{ width: rem(14), height: rem(14) }} />}
         >
-          Add new tag
+          Add Tag
         </Menu.Item>
       </Menu.Dropdown>
     </Menu>

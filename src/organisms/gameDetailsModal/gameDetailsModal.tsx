@@ -56,7 +56,7 @@ export default function GameDetailsModal({
             minPlayers={game.minPlayers}
             maxPlayers={game.maxPlayers}
           />
-          <Tags tags={game.tags} pt="sm" />
+          <Tags tags={game.tags} pt={game.tags.length > 0 ? "sm" : undefined} />
           <Divider my="sm" color="dark.4" />
           <Text fz="sm">{game.description}</Text>
         </Modal.Body>

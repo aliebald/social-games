@@ -13,6 +13,6 @@
 
 .active,
 .headerLink:hover {
-  background-color: var(--mantine-color-blue-9);
+  background-color: var(--mantine-color-cyan-light);
   color: var(--mantine-color-white);
 }

@@ -16,6 +16,8 @@ const theme = createTheme({
       "#101113",
     ],
   },
+  primaryColor: "cyan",
+  primaryShade: { light: 6, dark: 9 },
 });
 
 export default theme;
