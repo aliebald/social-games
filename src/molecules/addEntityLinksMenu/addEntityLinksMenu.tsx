@@ -3,7 +3,7 @@
 import useUser from "@/networking/useUser";
 import styles from "./addEntityLinksMenu.module.css";
 import { Menu, rem, ActionIcon } from "@mantine/core";
-import { IconPlus, IconDeviceGamepad, IconTag } from "@tabler/icons-react";
+import { IconPlus, IconDeviceGamepad2, IconTag } from "@tabler/icons-react";
 import Link from "next/link";
 
 interface AddHeaderMenuProps {}
@@ -34,7 +34,7 @@ export default function AddEntityLinksMenu({}: AddHeaderMenuProps) {
           component={Link}
           href="/games/create"
           leftSection={
-            <IconDeviceGamepad style={{ width: rem(14), height: rem(14) }} />
+            <IconDeviceGamepad2 style={{ width: rem(14), height: rem(14) }} />
           }
         >
           Add new game
