@@ -2,6 +2,7 @@ import { Container, Group } from "@mantine/core";
 import styles from "./header.module.css";
 import HeaderLink from "@/atoms/headerLink/headerLink";
 import UserMenu from "@/molecules/userMenu/userMenu";
+import AddEntityLinksMenu from "@/molecules/addEntityLinksMenu/addEntityLinksMenu";
 
 export default function Header() {
   return (
@@ -10,12 +11,8 @@ export default function Header() {
         <Group gap={5} align="center" className={styles.group}>
           <HeaderLink href="/" label="Home" />
           <HeaderLink href="/games" label="Games" />
-          <HeaderLink href="/tags" label="Tags" />
-          <HeaderLink
-            href="/games/create"
-            label="Add Game"
-            className={styles.mlAuto}
-          />
+          <HeaderLink href="/tags" label="Tags" className={styles.mrAuto} />
+          <AddEntityLinksMenu />
           <UserMenu />
         </Group>
       </Container>
