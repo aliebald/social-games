@@ -12,8 +12,9 @@ import theme from "@/theme";
 import Header from "@/organisms/header/header";
 
 export const metadata: Metadata = {
-  title: "Games Finder",
-  description: "Games Finder - working title",
+  title: "Social Games",
+  description:
+    "A collection of games to play online with others. Discover games to play together or contribute new titles to the collection.",
 };
 
 interface RootLayoutProps {
