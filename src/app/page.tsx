@@ -72,7 +72,7 @@ export default function Home() {
         games list <Anchor href="/games">here</Anchor>
       </Text>
       {/* TODO remove - temporary */}
-      {user?.displayName?.startsWith("Alexander") && (
+      {user?.admin && (
         <>
           <Title size="h2" order={2} pt="xl" pb="md">
             Dev Zone
