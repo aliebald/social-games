@@ -4,12 +4,15 @@ import { showLoadingNotification } from "@/molecules/loadingNotification/loading
 import addGame from "@/networking/addGame";
 import useUser from "@/networking/useUser";
 import GameForm, { GameFormValues } from "@/organisms/gameForm/gameForm";
+import { useDelayedRedirectIfNotLoggedIn } from "@/util";
 import { Container, Title, Text, Divider } from "@mantine/core";
 import { useRouter } from "next/navigation";
 
 export default function CreateGamePage() {
   const router = useRouter();
   const user = useUser();
+
+  useDelayedRedirectIfNotLoggedIn();
 
   const onSubmit = async (gameFormValues: GameFormValues) => {
     const { successNotification, errorNotification } = showLoadingNotification({

@@ -4,12 +4,15 @@ import { showLoadingNotification } from "@/molecules/loadingNotification/loading
 import addTag from "@/networking/addTag";
 import useUser from "@/networking/useUser";
 import TagForm, { TagFormValues } from "@/organisms/tagForm/tagForm";
+import { useDelayedRedirectIfNotLoggedIn } from "@/util";
 import { Container, Title, Text, Divider } from "@mantine/core";
 import { useRouter } from "next/navigation";
 
 export default function CreateTagPage() {
   const router = useRouter();
   const user = useUser();
+
+  useDelayedRedirectIfNotLoggedIn();
 
   const onSubmit = async (tagFormValues: TagFormValues) => {
     const { successNotification, errorNotification } = showLoadingNotification({

@@ -8,6 +8,7 @@ import useGame from "@/networking/useGame";
 import { useEffect, useState } from "react";
 import { parseGameToGameFormValues } from "@/organisms/gameForm/util";
 import { showLoadingNotification } from "@/molecules/loadingNotification/loadingNotification";
+import { useDelayedRedirectIfNotLoggedIn } from "@/util";
 
 interface EditGamePageProps {
   params: { id: string };
@@ -22,6 +23,8 @@ export default function EditGamePage({ params }: EditGamePageProps) {
     if (game === null) return;
     setInitialGameFormValues(parseGameToGameFormValues(game));
   }, [game]);
+
+  useDelayedRedirectIfNotLoggedIn();
 
   const onSubmit = async (gameFormValues: GameFormValues) => {
     const { successNotification, errorNotification } = showLoadingNotification({

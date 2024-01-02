@@ -8,6 +8,7 @@ import TagForm, { TagFormValues } from "@/organisms/tagForm/tagForm";
 import useTag from "@/networking/useTag";
 import updateTag from "@/networking/updateTag";
 import useUser from "@/networking/useUser";
+import { useDelayedRedirectIfNotLoggedIn } from "@/util";
 
 interface EditTagPageProps {
   params: { id: string };
@@ -18,6 +19,8 @@ export default function EditTagPage({ params }: EditTagPageProps) {
   const user = useUser();
   const [initialTagFormValues, setInitialTagFormValues] =
     useState<TagFormValues | null>(null);
+
+  useDelayedRedirectIfNotLoggedIn();
 
   useEffect(() => {
     if (tag === null) return;

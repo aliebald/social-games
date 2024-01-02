@@ -18,12 +18,14 @@ import {
   where,
 } from "firebase/firestore";
 import { db } from "@/firebase";
+import { useDelayedRedirectIfNotLoggedIn } from "@/util";
 
 export default function SettingsPage() {
   const user = useUser();
-
   const [initialSettingsFormValues, setInitialSettingsFormValues] =
     useState<SettingsFormValues>({ displayName: "" });
+
+  useDelayedRedirectIfNotLoggedIn();
 
   useEffect(() => {
     if (user === null) return;
