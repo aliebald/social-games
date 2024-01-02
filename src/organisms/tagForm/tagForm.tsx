@@ -34,7 +34,7 @@ export type TagFormValues = Omit<Tag, "id" | "authorUid">;
 
 interface TagFormProps {
   initialValues?: TagFormValues | null;
-  onSubmit: (game: TagFormValues) => void | Promise<void>;
+  onSubmit: (tag: TagFormValues) => void | Promise<void>;
 }
 
 const defaultInitialValues: TagFormValues = {
@@ -52,7 +52,7 @@ export default function TagForm({ initialValues, onSubmit }: TagFormProps) {
         { min: 2, max: 20 },
         "Title must be 2-20 characters long"
       ),
-      description: isNotEmpty("Enter a game description"),
+      description: isNotEmpty("Enter a tag description"),
     },
   });
 

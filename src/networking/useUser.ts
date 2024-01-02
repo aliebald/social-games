@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  User as FirebaseUser,
-  getAuth,
-  onAuthStateChanged,
-} from "firebase/auth";
+import { User as FirebaseUser, getAuth, onIdTokenChanged } from "firebase/auth";
 
 export interface User extends FirebaseUser {
   admin: boolean;
@@ -14,7 +10,7 @@ export default function useUser() {
 
   useEffect(() => {
     const auth = getAuth();
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+    const unsubscribe = onIdTokenChanged(auth, async (user) => {
       if (user === null) {
         setUser(null);
         return;

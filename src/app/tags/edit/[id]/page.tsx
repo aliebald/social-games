@@ -56,19 +56,17 @@ export default function EditTagPage({ params }: EditTagPageProps) {
   };
 
   return (
-    <>
-      <Container>
-        <LoadingOverlay
-          visible={tag === null}
-          zIndex={1000}
-          overlayProps={{ radius: "sm", blur: 2 }}
-          className={styles.overlay}
-        />
-        <Title pb="sm">Edit {tag?.title}</Title>
-        <Text>Edit an existing tag.</Text>
-        <Divider my="md" />
-        <TagForm initialValues={initialTagFormValues} onSubmit={onSubmit} />
-      </Container>
-    </>
+    <Container>
+      <LoadingOverlay
+        visible={tag === null}
+        zIndex={1000}
+        overlayProps={{ radius: "sm", blur: 2 }}
+        className={styles.overlay}
+      />
+      <Title pb="sm">Edit {tag?.title}</Title>
+      <Text>Edit an existing tag.</Text>
+      <Divider my="md" />
+      <TagForm initialValues={initialTagFormValues} onSubmit={onSubmit} />
+    </Container>
   );
 }

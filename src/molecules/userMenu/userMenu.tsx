@@ -1,12 +1,14 @@
 "use client";
 
+import styles from "./userMenu.module.css";
 import { deleteUser, getAuth, signOut } from "firebase/auth";
-import { Menu, rem, Avatar, Button } from "@mantine/core";
-import { IconLogout, IconTrash } from "@tabler/icons-react";
+import { Menu, Avatar, Button } from "@mantine/core";
+import { IconLogout, IconSettings, IconTrash } from "@tabler/icons-react";
 import useUser, { User } from "@/networking/useUser";
 import LoginModal from "@/organisms/loginModal/loginModal";
 import { useState } from "react";
 import { showLoadingNotification } from "../loadingNotification/loadingNotification";
+import Link from "next/link";
 
 export default function UserMenu() {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -45,23 +47,23 @@ export default function UserMenu() {
           {user.admin ? " [admin]" : ""}
         </Menu.Label>
         <Menu.Item
-          // color="green"
-          leftSection={
-            <IconLogout style={{ width: rem(14), height: rem(14) }} />
-          }
+          component={Link}
+          href="/settings"
+          leftSection={<IconSettings className={styles.icon} />}
+        >
+          Settings
+        </Menu.Item>
+        <Menu.Item
+          leftSection={<IconLogout className={styles.icon} />}
           onClick={logout}
         >
           Logout
         </Menu.Item>
-
         <Menu.Divider />
-
         <Menu.Label>Danger zone</Menu.Label>
         <Menu.Item
           color="red"
-          leftSection={
-            <IconTrash style={{ width: rem(14), height: rem(14) }} />
-          }
+          leftSection={<IconTrash className={styles.icon} />}
           onClick={() => deleteAccount(user)}
         >
           Delete Account
