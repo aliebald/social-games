@@ -26,7 +26,7 @@ export default function CreateGamePage() {
     }
 
     try {
-      const gameId = await addGame(gameFormValues, user.uid);
+      const gameId = await addGame(gameFormValues, user);
       successNotification({
         title: "Success",
         message: `Successfully saved ${gameFormValues.title}`,

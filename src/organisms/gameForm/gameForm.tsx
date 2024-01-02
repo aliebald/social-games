@@ -20,7 +20,7 @@ import Anchor from "@/atoms/anchor/anchor";
 export interface GameFormValues
   extends Omit<
     Game,
-    "tags" | "id" | "authorUid" | "thumbnailUrl" | "thumbnailRef"
+    "tags" | "id" | "authorUid" | "authorName" | "thumbnailUrl" | "thumbnailRef"
   > {
   tags: string[];
   existingThumbnailName: string | null;

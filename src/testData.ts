@@ -2,7 +2,10 @@ import { GameWithoutId } from "./types/game";
 import Tag from "./types/tag";
 
 interface TestDataGame
-  extends Omit<GameWithoutId, "authorUid" | "thumbnailUrl" | "thumbnailRef"> {
+  extends Omit<
+    GameWithoutId,
+    "authorUid" | "authorName" | "thumbnailUrl" | "thumbnailRef"
+  > {
   image: string;
 }
 

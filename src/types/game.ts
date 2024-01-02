@@ -18,6 +18,7 @@ export default interface Game {
   minPlayers?: number;
   maxPlayers?: number;
   authorUid: string;
+  authorName: string | null;
 }
 
 export type GameWithoutId = Omit<Game, "id">;
@@ -40,6 +41,7 @@ const defaultGame: GameWithoutId = {
   websiteUrl: "",
   tags: [],
   authorUid: "unknown",
+  authorName: null,
   thumbnailRef: null,
   thumbnailUrl: null,
 };

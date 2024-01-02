@@ -8,7 +8,6 @@ import useGame from "@/networking/useGame";
 import { useEffect, useState } from "react";
 import { parseGameToGameFormValues } from "@/organisms/gameForm/util";
 import { showLoadingNotification } from "@/molecules/loadingNotification/loadingNotification";
-import useUser from "@/networking/useUser";
 
 interface EditGamePageProps {
   params: { id: string };
@@ -16,7 +15,6 @@ interface EditGamePageProps {
 
 export default function EditGamePage({ params }: EditGamePageProps) {
   const game = useGame(params.id);
-  const user = useUser();
   const [initialGameFormValues, setInitialGameFormValues] =
     useState<GameFormValues | null>(null);
 
@@ -31,16 +29,16 @@ export default function EditGamePage({ params }: EditGamePageProps) {
       message: `Updating ${gameFormValues.title}`,
     });
 
-    if (user === null) {
+    if (game === null) {
       errorNotification({
         title: "Error",
-        message: `Failed to update ${gameFormValues.title}. Please log in and try again.`,
+        message: `Failed to update ${gameFormValues.title}. The game was not found.`,
       });
       return;
     }
 
     try {
-      await updateGame(params.id, gameFormValues, user.uid);
+      await updateGame(params.id, gameFormValues, game);
     } catch (error) {
       console.error("Failed to update game. Error:", error);
       errorNotification({

@@ -4,10 +4,11 @@ import { GameFormValues } from "@/organisms/gameForm/gameForm";
 import { parseGameFormValuesToBackendFormat } from "@/organisms/gameForm/util";
 import { UploadResult } from "firebase/storage";
 import { uploadThumbnail } from "./uploadThumbnail";
+import { User } from "./useUser";
 
 export default async function addGame(
   gameFormValues: GameFormValues,
-  authorUid: string
+  author: User
 ) {
   console.log("Adding game", gameFormValues);
 
@@ -19,13 +20,14 @@ export default async function addGame(
     thumbnailUploadResult = await uploadThumbnail(
       gameFormValues.newThumbnail,
       gameId,
-      authorUid
+      author.uid
     );
   }
 
   const serializedGame = parseGameFormValuesToBackendFormat(
     gameFormValues,
-    authorUid,
+    author.uid,
+    author.displayName,
     thumbnailUploadResult
   );
 

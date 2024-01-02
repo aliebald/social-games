@@ -34,7 +34,7 @@ export default function Home() {
             newThumbnail: null,
             tags: getRandomArrayElements(tags, 4).map((tag) => tag.id),
           },
-          user.uid
+          user
         )
       )
     );

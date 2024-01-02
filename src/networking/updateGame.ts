@@ -4,11 +4,12 @@ import { GameFormValues } from "@/organisms/gameForm/gameForm";
 import { parseGameFormValuesToBackendFormat } from "@/organisms/gameForm/util";
 import { UploadResult } from "firebase/storage";
 import { uploadThumbnail } from "./uploadThumbnail";
+import Game from "@/types/game";
 
 export default async function updateGame(
   id: string,
   gameFormValues: GameFormValues,
-  authorUid: string
+  oldGame: Game
 ) {
   console.log(`Updating "${gameFormValues.title}"`);
 
@@ -20,13 +21,14 @@ export default async function updateGame(
     thumbnailUploadResult = await uploadThumbnail(
       gameFormValues.newThumbnail,
       gameId,
-      authorUid
+      oldGame.authorUid
     );
   }
 
   const serializedGame = parseGameFormValuesToBackendFormat(
     gameFormValues,
-    authorUid,
+    oldGame.authorUid,
+    oldGame.authorName,
     thumbnailUploadResult
   );
   const docRef = await updateDoc(gameDoc, serializedGame);
