@@ -57,8 +57,11 @@ export default function GameDetailsModal({
             maxPlayers={game.maxPlayers}
           />
           <Tags tags={game.tags} pt={game.tags.length > 0 ? "sm" : undefined} />
-          <Divider my="sm" color="dark.4" />
-          <Text fz="sm">{game.description}</Text>
+          <Divider mt="sm" mb="md" color="dark.4" />
+          <Text>{game.description}</Text>
+          <Text fz="sm" pt="md" c="dimmed">
+            Author: {game.authorName}
+          </Text>
         </Modal.Body>
       </Modal.Content>
     </Modal.Root>
