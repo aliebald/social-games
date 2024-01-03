@@ -1,6 +1,5 @@
 "use client";
 
-import exportDb, { importDb } from "@/networking/inExportDb";
 import {
   Container,
   Title,
@@ -22,7 +21,7 @@ import deleteGame from "@/networking/deleteGame";
 import deleteTag from "@/networking/deleteTag";
 import useUser from "@/networking/useUser";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function AdminPage() {
   const user = useUser();
@@ -81,6 +80,21 @@ export default function AdminPage() {
     console.groupEnd();
   };
 
+  const [{ exportDb, importDb }, setInExportFunctions] = useState<{
+    exportDb?: () => Promise<void>;
+    importDb?: (file: File | null) => Promise<void>;
+  }>({});
+
+  useEffect(() => {
+    if (exportDb !== undefined) return;
+    const asyncImportExportFunctions = async () => {
+      const { exportDb, importDb } = await import("@/networking/inExportDb");
+      setInExportFunctions({ exportDb, importDb });
+    };
+
+    asyncImportExportFunctions();
+  }, [exportDb]);
+
   return (
     <Container>
       <Title size="h2" order={2} pt="xs">
@@ -91,10 +105,16 @@ export default function AdminPage() {
         testing. The &quot;old way&quot; (bellow) does not support images.
       </Text>
       <Group>
-        <Button onClick={exportDb}>Export Data</Button>
-        <FileButton onChange={importDb}>
-          {(props) => <Button {...props}>Import Data</Button>}
-        </FileButton>
+        <Button onClick={exportDb} loading={exportDb === undefined}>
+          Export Data
+        </Button>
+        {importDb !== undefined ? (
+          <FileButton onChange={importDb}>
+            {(props) => <Button {...props}>Import Data</Button>}
+          </FileButton>
+        ) : (
+          <Button loading>Import Data</Button>
+        )}
       </Group>
 
       <Title size="h2" order={2} pt="xl" pb="md">

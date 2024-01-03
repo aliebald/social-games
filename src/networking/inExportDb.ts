@@ -16,7 +16,7 @@ import { isArray, omit } from "lodash";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
 
-export default async function exportDb() {
+export async function exportDb() {
   console.group("Exporting DB");
   const tagsSnapshot = await getDocs(collection(db, "tags"));
   const tags = tagsSnapshot.docs.map((tagSnapshot) => ({
