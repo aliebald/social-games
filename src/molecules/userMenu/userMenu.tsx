@@ -3,7 +3,12 @@
 import styles from "./userMenu.module.css";
 import { deleteUser, getAuth, signOut } from "firebase/auth";
 import { Menu, Avatar, Button } from "@mantine/core";
-import { IconLogout, IconSettings, IconTrash } from "@tabler/icons-react";
+import {
+  IconId,
+  IconLogout,
+  IconSettings,
+  IconTrash,
+} from "@tabler/icons-react";
 import useUser, { User } from "@/networking/useUser";
 import LoginModal from "@/organisms/loginModal/loginModal";
 import { useState } from "react";
@@ -53,6 +58,15 @@ export default function UserMenu() {
         >
           Settings
         </Menu.Item>
+        {user.admin && (
+          <Menu.Item
+            component={Link}
+            href="/admin"
+            leftSection={<IconId className={styles.icon} />}
+          >
+            Administration
+          </Menu.Item>
+        )}
         <Menu.Item
           leftSection={<IconLogout className={styles.icon} />}
           onClick={logout}
