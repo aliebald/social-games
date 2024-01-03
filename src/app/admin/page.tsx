@@ -108,13 +108,13 @@ export default function AdminPage() {
         <Button onClick={exportDb} loading={exportDb === undefined}>
           Export Data
         </Button>
-        {importDb !== undefined ? (
-          <FileButton onChange={importDb}>
-            {(props) => <Button {...props}>Import Data</Button>}
-          </FileButton>
-        ) : (
-          <Button loading>Import Data</Button>
-        )}
+        <FileButton onChange={importDb !== undefined ? importDb : () => {}}>
+          {(props) => (
+            <Button {...props} loading={exportDb === undefined}>
+              Import Data
+            </Button>
+          )}
+        </FileButton>
       </Group>
 
       <Title size="h2" order={2} pt="xl" pb="md">
