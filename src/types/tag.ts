@@ -30,9 +30,13 @@ export function deserializeTag(
     | QueryDocumentSnapshot<DocumentData, DocumentData>
     | DocumentSnapshot<DocumentData, DocumentData>
 ): Tag {
+  const data = backendSnapshot.data();
+  if (data === undefined) {
+    console.error(`No data for tag with ID: ${backendSnapshot.id}.`);
+  }
   return {
     ...defaultTag,
-    ...backendSnapshot.data(),
+    ...data,
     id: backendSnapshot.id,
   };
 }
