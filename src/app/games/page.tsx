@@ -31,7 +31,7 @@ export default function GamesPage() {
             user !== null && (user.admin || user.uid === gameDetails.authorUid)
           }
           open={gameDetailsOpen}
-          close={() => setGameDetailsOpen(false)}
+          onClose={() => setGameDetailsOpen(false)}
         />
       )}
     </Container>

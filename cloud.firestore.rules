@@ -8,13 +8,11 @@ service cloud.firestore {
 
     match /games/{game} {
       allow read: if true;
-      allow create, update: if isLoggedIn() && isDocumentOwnerOrAdmin()
-      allow delete: if isLoggedIn() && isAdmin()
+      allow create, update, delete: if isLoggedIn() && isDocumentOwnerOrAdmin()
     }
     match /tags/{tag} {
       allow read: if true;
-      allow create, update: if isLoggedIn() && isDocumentOwnerOrAdmin()
-      allow delete: if isLoggedIn() && isAdmin()
+      allow create, update, delete: if isLoggedIn() && isDocumentOwnerOrAdmin()
     }
 
     function isLoggedIn() {

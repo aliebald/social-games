@@ -1,29 +1,67 @@
+"use client";
+
 import styles from "./gameDetailsModal.module.css";
 import Game from "@/types/game";
 import { Group, Modal, Text, Title, Flex, Divider } from "@mantine/core";
-import { IconWorld, IconPencil } from "@tabler/icons-react";
+import { IconWorld, IconPencil, IconTrash } from "@tabler/icons-react";
 import LinkIconWithTooltip from "@/molecules/linkIconWithTooltip/linkIconWithTooltip";
 import PlayerCount from "@/atoms/playerCount/playerCount";
 import Tags from "@/molecules/tags/tags";
 import GameImageWithFallback from "@/atoms/gameImageWithFallback/gameImageWithFallback";
+import ActionIconWithTooltip from "@/molecules/actionIconWithTooltip/actionIconWithTooltip";
+import deleteGame from "@/networking/deleteGame";
+import { showLoadingNotification } from "@/molecules/loadingNotification/loadingNotification";
 
 interface GameDetailsModalProps {
   game: Game;
   canEdit: boolean;
   open: boolean;
-  close: () => void;
+  onClose: () => void;
 }
 
 export default function GameDetailsModal({
   game,
   canEdit,
   open,
-  close,
+  onClose,
 }: GameDetailsModalProps) {
+  const handleDeleteGame = async (game: Game) => {
+    if (
+      !window.confirm(
+        `Do you really want to delete ${game.title}? This cannot be undone.`
+      )
+    ) {
+      return;
+    }
+
+    const { successNotification, errorNotification } = showLoadingNotification({
+      title: "Deleting game",
+      message: `Deleting ${game.title}`,
+    });
+
+    try {
+      await deleteGame(game);
+    } catch (error) {
+      console.error(error);
+      errorNotification({
+        title: "Error",
+        message: `Failed to delete ${game.title}`,
+      });
+      return;
+    }
+
+    successNotification({
+      title: "Success",
+      message: `Successfully deleted ${game.title}`,
+    });
+
+    onClose();
+  };
+
   return (
     <Modal.Root
       opened={open && game !== null}
-      onClose={close}
+      onClose={onClose}
       size="lg"
       className={styles.modal}
     >
@@ -37,6 +75,13 @@ export default function GameDetailsModal({
               {game.title}
             </Title>
             <Group gap="xs">
+              {canEdit && (
+                <ActionIconWithTooltip
+                  tooltip={`Delete ${game.title}`}
+                  onClick={() => handleDeleteGame(game)}
+                  Icon={IconTrash}
+                />
+              )}
               {canEdit && (
                 <LinkIconWithTooltip
                   href={`/games/edit/${game.id}`}
