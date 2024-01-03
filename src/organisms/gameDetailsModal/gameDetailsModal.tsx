@@ -10,7 +10,6 @@ import Tags from "@/molecules/tags/tags";
 import GameImageWithFallback from "@/atoms/gameImageWithFallback/gameImageWithFallback";
 import ActionIconWithTooltip from "@/molecules/actionIconWithTooltip/actionIconWithTooltip";
 import deleteGame from "@/networking/deleteGame";
-import { showLoadingNotification } from "@/molecules/loadingNotification/loadingNotification";
 
 interface GameDetailsModalProps {
   game: Game;
@@ -34,28 +33,9 @@ export default function GameDetailsModal({
       return;
     }
 
-    const { successNotification, errorNotification } = showLoadingNotification({
-      title: "Deleting game",
-      message: `Deleting ${game.title}`,
-    });
-
-    try {
-      await deleteGame(game);
-    } catch (error) {
-      console.error(error);
-      errorNotification({
-        title: "Error",
-        message: `Failed to delete ${game.title}`,
-      });
-      return;
+    if (await deleteGame(game)) {
+      onClose();
     }
-
-    successNotification({
-      title: "Success",
-      message: `Successfully deleted ${game.title}`,
-    });
-
-    onClose();
   };
 
   return (

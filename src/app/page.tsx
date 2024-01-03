@@ -46,7 +46,7 @@ export default function Home() {
     console.group("Delete DB");
 
     const games = await fetchGames();
-    await Promise.all(games.map((game) => deleteGame(game.id)));
+    await Promise.all(games.map((game) => deleteGame(game)));
 
     const tags = await fetchTags();
     await Promise.all(tags.map((tags) => deleteTag(tags.id)));
