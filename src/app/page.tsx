@@ -43,13 +43,14 @@ export default function Home() {
 
   // Temporary
   const deleteDb = async () => {
+    if (user === null) return;
     console.group("Delete DB");
 
     const games = await fetchGames();
     await Promise.all(games.map((game) => deleteGame(game)));
 
     const tags = await fetchTags();
-    await Promise.all(tags.map((tags) => deleteTag(tags.id)));
+    await Promise.all(tags.map((tag) => deleteTag(tag, user)));
 
     console.log("Successfully deleted DB");
     console.groupEnd();

@@ -1,11 +1,13 @@
 "use client";
 
-import LinkIcon from "@/atoms/linkIcon/linkIcon";
 import TagBadge from "@/atoms/tagBadge/tagBadge";
-import useUser from "@/networking/useUser";
+import ActionIconWithTooltip from "@/molecules/actionIconWithTooltip/actionIconWithTooltip";
+import LinkIconWithTooltip from "@/molecules/linkIconWithTooltip/linkIconWithTooltip";
+import deleteTag from "@/networking/deleteTag";
+import useUser, { User } from "@/networking/useUser";
 import Tag from "@/types/tag";
-import { Table } from "@mantine/core";
-import { IconPencil } from "@tabler/icons-react";
+import { Group, Table } from "@mantine/core";
+import { IconPencil, IconTrash } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
 
 interface TagsTableProps {
@@ -25,19 +27,30 @@ export default function TagsTable({ tags }: TagsTableProps) {
           canEdit ? () => router.push(`tags/edit/${tag.id}`) : undefined
         }
       >
-        {user !== null && (
-          <Table.Td>
-            {canEdit && (
-              <LinkIcon href={`tags/edit/${tag.id}`} Icon={IconPencil} />
-            )}
-          </Table.Td>
-        )}
         <Table.Td>{tag.title}</Table.Td>
         <Table.Td>{tag.description}</Table.Td>
         <Table.Td>{tag.color}</Table.Td>
         <Table.Td>
           <TagBadge tag={tag} />
         </Table.Td>
+        {user !== null && (
+          <Table.Td>
+            {canEdit && (
+              <Group gap="xs" wrap="nowrap">
+                <LinkIconWithTooltip
+                  href={`tags/edit/${tag.id}`}
+                  tooltip={`Edit ${tag.title}`}
+                  Icon={IconPencil}
+                />
+                <ActionIconWithTooltip
+                  tooltip={`Delete ${tag.title}`}
+                  onClick={() => handleDeleteTag(tag, user)}
+                  Icon={IconTrash}
+                />
+              </Group>
+            )}
+          </Table.Td>
+        )}
       </Table.Tr>
     );
   });
@@ -47,15 +60,25 @@ export default function TagsTable({ tags }: TagsTableProps) {
       <Table verticalSpacing="sm" highlightOnHover>
         <Table.Thead>
           <Table.Tr>
-            {user !== null && <Table.Th />}
             <Table.Th>Title</Table.Th>
             <Table.Th>Description</Table.Th>
             <Table.Th>Color</Table.Th>
             <Table.Th>Preview</Table.Th>
+            {user !== null && <Table.Th />}
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody>{rows}</Table.Tbody>
       </Table>
     </Table.ScrollContainer>
   );
+}
+
+async function handleDeleteTag(tag: Tag, user: User) {
+  if (
+    window.confirm(
+      `Do you really want to remove ${tag.title} from all games and delete it? This cannot be undone.`
+    )
+  ) {
+    await deleteTag(tag, user);
+  }
 }

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { User as FirebaseUser, getAuth, onIdTokenChanged } from "firebase/auth";
+import { set } from "lodash";
 
 export interface User extends FirebaseUser {
   admin: boolean;
@@ -10,16 +11,16 @@ export default function useUser() {
 
   useEffect(() => {
     const auth = getAuth();
-    const unsubscribe = onIdTokenChanged(auth, async (user) => {
-      if (user === null) {
+    const unsubscribe = onIdTokenChanged(auth, async (firebaseUser) => {
+      if (firebaseUser === null) {
         setUser(null);
         return;
       }
 
       const admin: boolean =
-        (await user.getIdTokenResult()).claims.admin === true;
+        (await firebaseUser.getIdTokenResult()).claims.admin === true;
 
-      setUser({ ...user, admin });
+      setUser(set(firebaseUser, "admin", admin) as User);
     });
     return unsubscribe;
   }, []);

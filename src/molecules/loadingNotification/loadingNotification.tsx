@@ -45,7 +45,7 @@ export function showLoadingNotification(
       color: "red",
       icon: <IconX className={styles.icon} />,
       loading: false,
-      autoClose: 5000,
+      autoClose: 10000,
       withCloseButton: true,
     });
   };
