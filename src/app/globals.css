@@ -1,4 +1,6 @@
 :root {
+  --scrollbar-bg: var(--mantine-color-gray-9);
+  --scrollbar-thumb: var(--mantine-color-gray-7);
 }
 
 * {
@@ -14,6 +16,24 @@ body {
 }
 
 body {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg);
+}
+
+body::-webkit-scrollbar {
+  width: 14px;
+  height: 12px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+  border-radius: 6px;
+  border: 3px solid var(--scrollbar-bg);
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--scrollbar-bg);
 }
 
 a {
