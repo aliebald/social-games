@@ -1,7 +1,6 @@
 .outerWrapper {
   width: 100%;
   height: rem(56px);
-  background-color: var(--mantine-color-body);
   background-color: light-dark(
     var(--mantine-color-gray-0),
     var(--mantine-color-dark-6)

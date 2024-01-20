@@ -10,6 +10,7 @@ import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import theme from "@/theme";
 import Header from "@/organisms/header/header";
+import Footer from "@/organisms/footer/footer";
 
 export const metadata: Metadata = {
   title: "Social Games",
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <div className={styles.mainLayout}>
             <Header className={styles.header} />
             <div className={styles.content}>{children}</div>
+            <Footer className={styles.footer} />
           </div>
         </MantineProvider>
       </body>
