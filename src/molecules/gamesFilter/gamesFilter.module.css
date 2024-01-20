@@ -1,0 +1,25 @@
+.grid {
+  align-items: center;
+}
+
+.switchGroup {
+  margin-top: calc(var(--mantine-spacing-xs) / 2);
+  margin-bottom: calc(var(--mantine-spacing-xs) / 2);
+}
+
+.chevron {
+  transition: transform 300ms ease-in-out;
+}
+
+.chevronClosed {
+  transform: rotate(180deg);
+}
+
+.resetBtn {
+  margin-left: auto;
+  transition: transform 300ms ease-in-out;
+}
+
+.resetBtnHidden {
+  transform: scale(0) !important;
+}

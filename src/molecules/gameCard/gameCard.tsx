@@ -4,7 +4,7 @@ import styles from "./gameCard.module.css";
 import Game from "@/types/game";
 import { Card, Group, Text } from "@mantine/core";
 import { IconWorld } from "@tabler/icons-react";
-import React from "react";
+import { ForwardedRef, forwardRef, memo } from "react";
 import LinkIconWithTooltip from "../linkIconWithTooltip/linkIconWithTooltip";
 import PlayerCount from "@/atoms/playerCount/playerCount";
 import Tags from "../tags/tags";
@@ -15,9 +15,13 @@ interface GameCardProps {
   openDetails: () => void;
 }
 
-export default function GameCard({ game, openDetails }: GameCardProps) {
+function GameCard(
+  { game, openDetails, ...domProps }: GameCardProps,
+  ref: ForwardedRef<HTMLDivElement>
+) {
+  // Note that `domProps` are required for react-flip-toolkit.
   return (
-    <Card withBorder radius="md" p="md">
+    <Card withBorder radius="md" p="md" ref={ref} {...domProps}>
       <Card.Section onClick={openDetails} className={styles.clickable}>
         <GameImageWithFallback game={game} height={180} />
       </Card.Section>
@@ -57,3 +61,5 @@ export default function GameCard({ game, openDetails }: GameCardProps) {
     </Card>
   );
 }
+
+export default memo(forwardRef(GameCard));
