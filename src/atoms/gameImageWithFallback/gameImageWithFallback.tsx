@@ -24,7 +24,7 @@ export default function GameImageWithFallback({
 
   return (
     <Center w="100%" h={height} className={styles.noImageContainer}>
-      <Title order={2} size="h1">
+      <Title order={2} size="h1" className={styles.fallbackText}>
         {game.title}
       </Title>
     </Center>
