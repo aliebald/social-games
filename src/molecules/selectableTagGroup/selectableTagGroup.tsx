@@ -1,11 +1,5 @@
 import styles from "./selectableTagGroup.module.css";
-import {
-  Chip,
-  Group,
-  MantineSpacing,
-  Skeleton,
-  StyleProp,
-} from "@mantine/core";
+import { Chip, Group, Skeleton } from "@mantine/core";
 import Tag from "@/types/tag";
 import TextWithInfoIconTooltip from "@/atoms/textWithInfoIconTooltip/textWithInfoIconTooltip";
 import { range } from "lodash";
@@ -17,7 +11,6 @@ interface SelectableTagGroupProps {
   selectedTagIds: string[];
   onChange: (selectedTagIds: string[]) => void;
   isTagDisabled?: (tag: Tag) => boolean;
-  pb?: StyleProp<MantineSpacing>;
 }
 
 export default function SelectableTagGroup({
@@ -27,7 +20,6 @@ export default function SelectableTagGroup({
   selectedTagIds,
   onChange,
   isTagDisabled,
-  pb,
 }: SelectableTagGroupProps) {
   const chips = tags.map((tag) => (
     <Chip
@@ -58,7 +50,7 @@ export default function SelectableTagGroup({
         fw={500}
       />
       <Chip.Group multiple value={selectedTagIds} onChange={onChange}>
-        <Group gap="xs" wrap="nowrap" pb={pb} className={styles.scrollGroup}>
+        <Group gap="xs" wrap="nowrap" className={styles.scrollGroup}>
           {chips}
           {skeletons}
         </Group>

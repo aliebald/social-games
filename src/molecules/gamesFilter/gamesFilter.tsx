@@ -11,6 +11,7 @@ import {
   Button,
   Divider,
   Box,
+  Space,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconChevronDown } from "@tabler/icons-react";
@@ -162,13 +163,13 @@ export default function GamesFilter({
           isTagDisabled={(tag) => filter.excludedTagIds.includes(tag.id)}
         />
         <SelectableTagGroup
-          pb="xs"
           label="Excluded Tags"
           tooltip="Games including a excluded tag will be hidden. Has priority over included tags filter above."
           tags={tags}
           selectedTagIds={filter.excludedTagIds}
           onChange={(excludedTagIds) => updateFilter({ excludedTagIds })}
         />
+        <Space h="xs" />
       </Collapse>
     </Container>
   );
