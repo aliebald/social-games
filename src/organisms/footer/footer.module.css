@@ -1,8 +1,12 @@
-.footerWrapper {
+.footer {
   width: 100%;
+  padding-top: 8px;
+}
+
+.footerGroup {
+  margin-left: auto;
   height: rem(32px);
-  margin-top: 4px;
-  padding-top: 4px;
-  border-top: 1px solid
-    light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
+  background-color: var(--mantine-color-dark-6);
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 }

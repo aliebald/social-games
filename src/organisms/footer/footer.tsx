@@ -10,9 +10,14 @@ interface FooterProps {
 
 export default function Footer({ className }: FooterProps) {
   return (
-    <div className={classNames(styles.footerWrapper, className)}>
-      <Container>
-        <Group justify="flex-end" gap="xs">
+    <footer className={classNames(styles.footer, className)}>
+      <Container display="flex">
+        <Group
+          justify="flex-end"
+          gap="sm"
+          px="sm"
+          className={styles.footerGroup}
+        >
           <LinkIcon
             variant="transparent"
             href="mailto:contact@liebald.dev"
@@ -26,6 +31,6 @@ export default function Footer({ className }: FooterProps) {
           />
         </Group>
       </Container>
-    </div>
+    </footer>
   );
 }

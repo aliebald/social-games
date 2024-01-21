@@ -36,7 +36,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <Notifications position="bottom-right" />
           <div className={styles.mainLayout}>
             <Header className={styles.header} />
-            <div className={styles.content}>{children}</div>
+            <main className={styles.content}>{children}</main>
             <Footer className={styles.footer} />
           </div>
         </MantineProvider>
