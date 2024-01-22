@@ -13,7 +13,7 @@ import {
   Box,
   Space,
 } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
+import { useLocalStorage } from "@mantine/hooks";
 import { IconChevronDown } from "@tabler/icons-react";
 import { isEqual, uniqBy } from "lodash";
 import classNames from "classnames";
@@ -39,7 +39,10 @@ export default function GamesFilter({
   games,
   setFilteredGames,
 }: GamesFilterProps) {
-  const [showFilter, { toggle: toggleShowFilter }] = useDisclosure(true);
+  const [showFilter, setShowFilter] = useLocalStorage({
+    key: "games-grid-filter-visible",
+    defaultValue: false,
+  });
 
   const tags = useMemo(() => getTagsFromGames(games), [games]);
   const defaultFilter = useMemo(
@@ -107,7 +110,7 @@ export default function GamesFilter({
 
       <Divider
         variant="dashed"
-        onClick={toggleShowFilter}
+        onClick={() => setShowFilter(!showFilter)}
         my="xs"
         label={
           <>
