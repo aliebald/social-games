@@ -91,7 +91,7 @@ export default function GamesFilter({
     });
 
   return (
-    <Container pb="sm">
+    <Container pb="sm" px={{ base: "0", md: "md" }}>
       <Group gap="xs">
         <Title size="h2">Games</Title>
         <Button
