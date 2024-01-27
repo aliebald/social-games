@@ -41,7 +41,7 @@ export default function GamesFilter({
 }: GamesFilterProps) {
   const [showFilter, setShowFilter] = useLocalStorage({
     key: "games-grid-filter-visible",
-    defaultValue: false,
+    defaultValue: true,
   });
 
   const tags = useMemo(() => getTagsFromGames(games), [games]);
