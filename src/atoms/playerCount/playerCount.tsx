@@ -26,7 +26,7 @@ function getPlayerRange(minPlayers?: number, maxPlayers?: number) {
     return `Up to ${maxPlayers} player${getPluralS(maxPlayers!)}`;
   }
   if (maxPlayers === undefined) {
-    return `${minPlayers} or more player${getPluralS(minPlayers)}`;
+    return `${minPlayers} or more players`;
   }
   return `${minPlayers} to ${maxPlayers} players`;
 }
