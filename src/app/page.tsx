@@ -32,7 +32,7 @@ export default function Home() {
       </Title>
       <Text pt="xs">
         Take a look at the <Anchor href="/games">games</Anchor> section. Enter
-        the desired Player count, adjust selected tags and inspect the results.
+        the desired player count, adjust selected tags and inspect the results.
       </Text>
 
       <Title size="h2" pt="xl">
