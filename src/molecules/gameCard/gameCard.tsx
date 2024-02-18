@@ -5,7 +5,6 @@ import Game from "@/types/game";
 import { ActionIcon, Card, Group, Text } from "@mantine/core";
 import { IconWorld } from "@tabler/icons-react";
 import { ForwardedRef, forwardRef, memo } from "react";
-import LinkIconWithTooltip from "../linkIconWithTooltip/linkIconWithTooltip";
 import PlayerCount from "@/atoms/playerCount/playerCount";
 import Tags from "../tags/tags";
 import GameImageWithFallback from "@/atoms/gameImageWithFallback/gameImageWithFallback";
