@@ -23,6 +23,7 @@ export default function TagBadge({ tag, size }: TagProps) {
           onMouseLeave={close}
           className={styles.badge}
           radius="sm"
+          onClick={(e) => e.stopPropagation()}
         >
           {tag.title}
         </Badge>

@@ -2,7 +2,7 @@
 
 import styles from "./gameCard.module.css";
 import Game from "@/types/game";
-import { Card, Group, Text } from "@mantine/core";
+import { ActionIcon, Card, Group, Text } from "@mantine/core";
 import { IconWorld } from "@tabler/icons-react";
 import { ForwardedRef, forwardRef, memo } from "react";
 import LinkIconWithTooltip from "../linkIconWithTooltip/linkIconWithTooltip";
@@ -21,27 +21,33 @@ function GameCard(
 ) {
   // Note that `domProps` are required for react-flip-toolkit.
   return (
-    <Card withBorder radius="md" p="md" ref={ref} {...domProps}>
-      <Card.Section onClick={openDetails} className={styles.clickable}>
+    <Card
+      withBorder
+      radius="md"
+      p="md"
+      ref={ref}
+      onClick={openDetails}
+      className={styles.clickable}
+      {...domProps}
+    >
+      <Card.Section>
         <GameImageWithFallback game={game} height={180} />
       </Card.Section>
       <Card.Section p="xs">
         <Group justify="space-between" gap={0}>
-          <Text
-            fz="lg"
-            fw={500}
-            truncate="end"
-            onClick={openDetails}
-            className={styles.clickable}
-          >
+          <Text fz="lg" fw={500} truncate="end">
             {game.title}
           </Text>
-          <LinkIconWithTooltip
-            tooltip={`Go to ${game.title}`}
+          <ActionIcon
+            variant="light"
+            component="a"
             href={game.websiteUrl}
-            Icon={IconWorld}
-            openInNewTab
-          />
+            target="_blank"
+            rel="noopener"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <IconWorld style={{ width: "75%", height: "75%" }} />
+          </ActionIcon>
         </Group>
         <PlayerCount
           size="xs"
