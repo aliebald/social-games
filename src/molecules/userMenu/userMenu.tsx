@@ -38,6 +38,11 @@ export default function UserMenu() {
     );
   }
 
+  const roles = [
+    user.admin ? "admin" : null,
+    user.member ? "member" : null,
+  ].filter((r) => r !== null);
+
   return (
     <Menu shadow="md">
       <Menu.Target>
@@ -49,7 +54,7 @@ export default function UserMenu() {
       <Menu.Dropdown>
         <Menu.Label>
           Welcome {user.displayName}
-          {user.admin ? " [admin]" : ""}
+          {roles.length > 0 ? ` [${roles.join(", ")}]` : ""}
         </Menu.Label>
         <Menu.Item
           component={Link}

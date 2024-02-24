@@ -10,7 +10,7 @@ import { IconPlus } from "@tabler/icons-react";
 export default function TagsPage() {
   const tags = useTags();
   const user = useUser();
-  const canCreateTag = user !== null;
+  const canCreateTag = user !== null && (user.member || user.admin);
 
   return (
     <Container>

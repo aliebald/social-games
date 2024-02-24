@@ -9,8 +9,8 @@ service firebase.storage {
       match /{fileName} {
         allow get;
         allow list: if isLoggedIn();
-        allow delete: if isLoggedIn() && isFileOwnerOrAdmin();
-        allow create, update: if isLoggedIn() && isFileOwnerOrAdmin() && isBellowMaxSize() && isValidContentType();
+        allow delete: if isLoggedIn() && isFileOwnerAndMemberOrAdmin();
+        allow create, update: if isLoggedIn() && isFileOwnerAndMemberOrAdmin() && isBellowMaxSize() && isValidContentType();
       }
     }
 
@@ -22,12 +22,16 @@ service firebase.storage {
       return request.auth.token.admin == true;
     }
 
+    function isMember() {
+      return request.auth.token.member == true;
+    }
+
     function isFileOwner() {
       return getResource().metadata.authorUid == request.auth.uid;
     }
 
-    function isFileOwnerOrAdmin() {
-      return isAdmin() || isFileOwner();
+    function isFileOwnerAndMemberOrAdmin() {
+      return isAdmin() || (isMember() && isFileOwner());
     }
 
     function isBellowMaxSize() {

@@ -11,7 +11,7 @@ interface AddHeaderMenuProps {}
 export default function AddEntityLinksMenu({}: AddHeaderMenuProps) {
   const user = useUser();
 
-  if (user === null) return <></>;
+  if (user === null || (!user.admin && !user.member)) return <></>;
 
   return (
     <Menu shadow="md">
