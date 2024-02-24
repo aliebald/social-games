@@ -7,6 +7,7 @@ import {
   FileButton,
   Group,
   Text,
+  Tabs,
 } from "@mantine/core";
 import { testGames, testTags } from "@/testData";
 import addGame from "@/networking/addGame";
@@ -22,6 +23,8 @@ import deleteTag from "@/networking/deleteTag";
 import useUser from "@/networking/useUser";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { IconDatabase, IconUsers } from "@tabler/icons-react";
+import UserManagement from "@/molecules/userManagement/userManagement";
 
 export default function AdminPage() {
   const user = useUser();
@@ -97,33 +100,66 @@ export default function AdminPage() {
 
   return (
     <Container>
-      <Title size="h2" order={2} pt="xs">
-        Export & Import
+      <Title size="h2" order={2} pb="sm">
+        Administration
       </Title>
-      <Text pt="xs" pb="md">
-        Intended as a quick way to add testdata after wiping the db during
-        testing. The &quot;old way&quot; (bellow) does not support images.
-      </Text>
-      <Group>
-        <Button onClick={exportDb} loading={exportDb === undefined}>
-          Export Data
-        </Button>
-        <FileButton onChange={importDb !== undefined ? importDb : () => {}}>
-          {(props) => (
-            <Button {...props} loading={exportDb === undefined}>
-              Import Data
-            </Button>
-          )}
-        </FileButton>
-      </Group>
+      <Tabs defaultValue="users">
+        <Tabs.List>
+          <Tabs.Tab
+            value="users"
+            leftSection={
+              <IconUsers style={{ width: "1rem", height: "1rem" }} />
+            }
+          >
+            User Management
+          </Tabs.Tab>
+          <Tabs.Tab
+            value="data"
+            leftSection={
+              <IconDatabase style={{ width: "1rem", height: "1rem" }} />
+            }
+          >
+            Data
+          </Tabs.Tab>
+        </Tabs.List>
 
-      <Title size="h2" order={2} pt="xl" pb="md">
-        Other
-      </Title>
-      <Button onClick={addTestdata}>Add Testdata</Button>
-      <Button ml="md" onClick={deleteDb} color="red">
-        Delete DB
-      </Button>
+        <Tabs.Panel value="users">
+          <UserManagement />
+        </Tabs.Panel>
+
+        <Tabs.Panel value="data">
+          <Title size="h2" order={2} pt="md">
+            Export & Import
+          </Title>
+          <Text pt="xs">
+            Intended as a quick way to add testdata after wiping the db during
+            testing. The &quot;old way&quot; (bellow) does not support images.
+          </Text>
+          <Text pt="xs" pb="md">
+            Roles / custom claims are not imported or exported!
+          </Text>
+          <Group>
+            <Button onClick={exportDb} loading={exportDb === undefined}>
+              Export Data
+            </Button>
+            <FileButton onChange={importDb !== undefined ? importDb : () => {}}>
+              {(props) => (
+                <Button {...props} loading={exportDb === undefined}>
+                  Import Data
+                </Button>
+              )}
+            </FileButton>
+          </Group>
+
+          <Title size="h2" order={2} pt="xl" pb="md">
+            Other
+          </Title>
+          <Button onClick={addTestdata}>Add Testdata</Button>
+          <Button ml="md" onClick={deleteDb} color="red">
+            Delete DB
+          </Button>
+        </Tabs.Panel>
+      </Tabs>
     </Container>
   );
 }

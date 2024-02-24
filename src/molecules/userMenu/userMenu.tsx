@@ -14,6 +14,7 @@ import LoginModal from "@/organisms/loginModal/loginModal";
 import { useState } from "react";
 import { showLoadingNotification } from "../loadingNotification/loadingNotification";
 import Link from "next/link";
+import { getDisplayRoles } from "@/util";
 
 export default function UserMenu() {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -38,10 +39,7 @@ export default function UserMenu() {
     );
   }
 
-  const roles = [
-    user.admin ? "admin" : null,
-    user.member ? "member" : null,
-  ].filter((r) => r !== null);
+  const roles = getDisplayRoles(user);
 
   return (
     <Menu shadow="md">
@@ -54,7 +52,7 @@ export default function UserMenu() {
       <Menu.Dropdown>
         <Menu.Label>
           Welcome {user.displayName}
-          {roles.length > 0 ? ` [${roles.join(", ")}]` : ""}
+          {roles ? ` [${roles}]` : ""}
         </Menu.Label>
         <Menu.Item
           component={Link}

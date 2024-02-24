@@ -1,6 +1,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import useUser from "./networking/useUser";
+import useUser, { User } from "./networking/useUser";
+import { UserRecord } from "./networking/admin/types";
 
 export function getRandomArrayElement<T>(arr: T[]) {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -27,4 +28,18 @@ export function useDelayedRedirectIfNotLoggedIn() {
     }, 1000);
     return () => clearTimeout(timeout);
   }, [router, user]);
+}
+
+export function getDisplayRoles(
+  objWithClaims: User | UserRecord["customClaims"],
+  fallback?: string
+): string | undefined {
+  return (
+    [
+      objWithClaims?.admin ? "admin" : null,
+      objWithClaims?.member ? "member" : null,
+    ]
+      .filter((r) => r !== null)
+      .join(", ") || fallback
+  );
 }
