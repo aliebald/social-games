@@ -5,7 +5,7 @@ import styles from "./loginModal.module.css";
 import GoogleButton from "@/atoms/googleButton/googleButton";
 import { googleProvider } from "@/firebase";
 import { Title, Text, Flex, Modal } from "@mantine/core";
-import { getAuth, signInWithRedirect } from "firebase/auth";
+import { getAuth, signInWithPopup } from "firebase/auth";
 
 interface LoginModalProps {
   visible: boolean;
@@ -15,16 +15,12 @@ interface LoginModalProps {
 export default function LoginModal({ visible, onClose }: LoginModalProps) {
   const auth = getAuth();
 
-  const loginUsingGoogle = () => {
-    // TODO Check best-practices for signInWithRedirect
-    // https://firebase.google.com/docs/auth/web/redirect-best-practices?authuser=0&hl=de
-    signInWithRedirect(auth, googleProvider).catch((error) => {
-      console.group("Failed google login");
-      console.log("errorCode", error.code);
-      console.log("errorMessage", error.message);
-      console.log("email", error.customData.email);
-      console.groupEnd();
-    });
+  const loginUsingGoogle = async () => {
+    try {
+      await signInWithPopup(auth, googleProvider);
+    } catch (error) {
+      console.error("Error during signInWithPopup (Google):", error);
+    }
   };
 
   return (
