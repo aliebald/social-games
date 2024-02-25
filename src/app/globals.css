@@ -1,6 +1,11 @@
 :root {
   --scrollbar-bg: var(--mantine-color-gray-9);
   --scrollbar-thumb: var(--mantine-color-gray-7);
+  --footer-height: rem(38px);
+
+  @mixin smaller-than 380px {
+    --footer-height: rem(56px);
+  }
 }
 
 * {

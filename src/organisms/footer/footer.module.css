@@ -1,12 +1,22 @@
 .footer {
   width: 100%;
-  padding-top: 8px;
+  margin-top: 8px;
+  border-top: 1px solid
+    light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
 }
 
-.footerGroup {
+.container {
   margin-left: auto;
-  height: rem(32px);
-  background-color: var(--mantine-color-dark-6);
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
+  height: calc(var(--footer-height) - 9px);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @mixin smaller-than 380px {
+    flex-direction: column;
+    justify-content: space-around;
+    padding-bottom: 4px;
+    padding-top: 4px;
+  }
 }
