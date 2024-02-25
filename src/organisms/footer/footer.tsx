@@ -15,8 +15,6 @@ const commonProps: MantineStyleProps = {
 
 export default function Footer({ className }: FooterProps) {
   const { publicRuntimeConfig } = getConfig();
-  console.log({ publicRuntimeConfig });
-
   return (
     <footer className={classNames(styles.footer, className)}>
       <Container className={styles.container}>
