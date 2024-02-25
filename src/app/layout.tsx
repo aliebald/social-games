@@ -16,6 +16,17 @@ export const metadata: Metadata = {
   title: "Social Games",
   description:
     "A collection of social games to play online with others. Discover games to play together or contribute new titles to the collection.",
+  openGraph: {
+    url: process.env.NEXT_PUBLIC_DOMAIN,
+    images: [
+      {
+        url: `${process.env.NEXT_PUBLIC_DOMAIN}/opengraph-image.png`,
+        width: 1200,
+        height: 630,
+      },
+    ],
+    type: "website",
+  },
 };
 
 interface RootLayoutProps {
