@@ -15,7 +15,7 @@ import Footer from "@/organisms/footer/footer";
 export const metadata: Metadata = {
   title: "Social Games",
   description:
-    "A collection of games to play online with others. Discover games to play together or contribute new titles to the collection.",
+    "A collection of social games to play online with others. Discover games to play together or contribute new titles to the collection.",
 };
 
 interface RootLayoutProps {
