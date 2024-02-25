@@ -15,7 +15,8 @@ Setup a new firebase project with the following components:
 - Storage
   - Apply the rules from `cloud.firestore.rules`
 
-In addition to the above components, add a web app for the frontend. The access information will be required for the next step.
+In addition to the above components, add a web app for the frontend and create a service account key (project settings > Service Accounts > Generate New Private Key).
+The access information will be required for the next step.
 
 ## Frontend
 
@@ -44,7 +45,8 @@ The frontend follows the atomic design principles, see [this article](https://br
 # Permissions
 
 - Everyone can view games and tags
-- Logged in users can create games and tags. They can also edit and delete games and tags created by them
-- Admins can edit and delete all games and tags
+- Logged in users with the member role can create games and tags. They can also edit and delete games and tags created by them
+- Admins can create, edit and delete all games and tags
 
-Admin permissions are manually added using the `add-claims-script.js`. Usage instructions can be found in the script.
+Permissions can be added manually using `add-claims-script.js` or using the administration page.
+Usage instructions for `add-claims-script.js` can be found in the script.

@@ -2,21 +2,12 @@
 
 import styles from "./page.module.css";
 import Anchor from "@/atoms/anchor/anchor";
-import useUser from "@/networking/useUser";
-import { Container, Title, Text, List, Group } from "@mantine/core";
-import { IconCheck, IconPlus } from "@tabler/icons-react";
+import useUser, { User } from "@/networking/useUser";
+import { Container, Title, Text, List, Group, Tooltip } from "@mantine/core";
+import { IconAlertCircle, IconCheck, IconPlus } from "@tabler/icons-react";
 
 export default function Home() {
   const user = useUser();
-
-  const loginListItem = (
-    <List.Item>
-      <Group gap="xs">
-        <Text td={user !== null ? "line-through" : undefined}>Login</Text>
-        {user !== null && <IconCheck height={20} width={20} color="green" />}
-      </Group>
-    </List.Item>
-  );
 
   return (
     <Container>
@@ -38,7 +29,30 @@ export default function Home() {
       <Title size="h2" pt="xl">
         Contribute
       </Title>
-      <Title size="h3" pt="xs">
+      <Text pt="xs">
+        You can contribute more games and tags to the collection.
+      </Text>
+
+      <Group gap="xs" pt="lg">
+        <Title size="h3">Prerequisites</Title>
+        <Tooltip
+          label={`The prerequisites are ${
+            user?.member || user?.admin ? "" : "not "
+          }fulfilled`}
+        >
+          {user?.member || user?.admin ? (
+            <IconCheck height={22} width={22} color="green" />
+          ) : (
+            <IconAlertCircle height={22} width={22} color="red" />
+          )}
+        </Tooltip>
+      </Group>
+      <Text pt="xs">
+        Only logged in users with the <i>member</i> role can contribute.
+        {" " + getMemberRoleText(user)}
+      </Text>
+
+      <Title size="h3" pt="lg">
         Adding a Game
       </Title>
       <Text pt="xs">
@@ -47,12 +61,11 @@ export default function Home() {
       </Text>
 
       <List type="ordered" withPadding pt="xs">
-        {loginListItem}
         <List.Item>
           <Group gap={0}>
             Click the
             <IconPlus height={20} width={20} className={styles.icon} />
-            icon in the header and select <i>Add Game</i>
+            icon in the header and select&nbsp;<i>Add Game</i>
           </Group>
         </List.Item>
         <List.Item>Enter game information and upload a thumbnail</List.Item>
@@ -75,12 +88,11 @@ export default function Home() {
       </Text>
 
       <List type="ordered" withPadding pt="xs">
-        {loginListItem}
         <List.Item>
           <Group gap={0}>
             Click the
             <IconPlus height={20} width={20} className={styles.icon} />
-            icon in the header and select <i>Add Tag</i>
+            icon in the header and select&nbsp;<i>Add Tag</i>
           </Group>
         </List.Item>
         <List.Item>Enter the tag information</List.Item>
@@ -91,4 +103,17 @@ export default function Home() {
       </List>
     </Container>
   );
+}
+
+function getMemberRoleText(user: User | null) {
+  if (user === null) {
+    return "Login to check if you have the member role.";
+  }
+  if (user.member) {
+    return "You already have the member role.";
+  }
+  if (user.admin) {
+    return "You have the admin role, which includes member permissions.";
+  }
+  return "Contact an administrator to receive the role.";
 }
