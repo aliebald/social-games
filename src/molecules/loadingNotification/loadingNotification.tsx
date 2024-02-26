@@ -4,7 +4,7 @@ import styles from "./loadingNotification.module.css";
 import { NotificationData, notifications } from "@mantine/notifications";
 import { IconCheck, IconX } from "@tabler/icons-react";
 
-type LoadingNotificationArgs = Omit<
+export type LoadingNotificationArgs = Omit<
   NotificationData,
   "loading" | "autoClose" | "withCloseButton" | "color" | "icon" | "id"
 >;

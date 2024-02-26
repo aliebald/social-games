@@ -13,7 +13,7 @@ export default function useUpdateClaims() {
   const { mutate } = useSWRConfig();
   const user = useUser();
 
-  return async (uid: string, claims: CustomClaims) => {
+  return async (uid: string, claims: CustomClaims): Promise<boolean> => {
     const init = async () => ({
       method: "POST",
       headers: {
@@ -28,12 +28,13 @@ export default function useUpdateClaims() {
     try {
       response = await jsonFetcher({ url: userClaimsEndpoint, init });
     } catch (_) {
-      return;
+      return false;
     }
     mutate<UserRecordCache>(
       (key) => isObject(key) && "url" in key && key.url === usersEndpoint,
       createUpdateUserRecordsCache(response)
     );
+    return true;
   };
 }
 

@@ -83,8 +83,8 @@ export default function Home() {
         information at a glance.
       </Text>
       <Text>
-        If a game has an attribute that has not fitting tag, you can add your
-        own tags as follows.
+        If a game has an attribute that has no fitting tag, you can add your own
+        tags as follows:
       </Text>
 
       <List type="ordered" withPadding pt="xs">
