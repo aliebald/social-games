@@ -136,6 +136,9 @@ export default function GamesFilter({
             label="Player count"
             value={filter.playerCount ?? ""}
             onChange={onPlayerCountChange}
+            min={1}
+            allowNegative={false}
+            allowDecimal={false}
           />
           <Switch.Group
             label="Include games without..."
