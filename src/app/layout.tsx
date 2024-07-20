@@ -6,7 +6,11 @@ import styles from "./layout.module.css";
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { ColorSchemeScript, MantineProvider } from "@mantine/core";
+import {
+  ColorSchemeScript,
+  MantineColorScheme,
+  MantineProvider,
+} from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import theme from "@/theme";
 import Header from "@/organisms/header/header";
@@ -32,9 +36,11 @@ export const metadata: Metadata = {
   },
 };
 
+const defaultColorScheme: MantineColorScheme = "dark";
+
 export const viewport: Viewport = {
   themeColor: "#1a1b1e",
-  colorScheme: "dark",
+  colorScheme: defaultColorScheme,
 };
 
 interface RootLayoutProps {
@@ -45,11 +51,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <head>
-        <ColorSchemeScript />
+        <ColorSchemeScript defaultColorScheme={defaultColorScheme} />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
       </head>
       <body>
-        <MantineProvider theme={theme} defaultColorScheme="dark">
+        <MantineProvider theme={theme} defaultColorScheme={defaultColorScheme}>
           <Analytics />
           <SpeedInsights />
           <Notifications position="bottom-right" />
