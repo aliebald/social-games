@@ -1,119 +1,89 @@
-"use client";
-
 import styles from "./page.module.css";
-import Anchor from "@/atoms/anchor/anchor";
-import useUser, { User } from "@/networking/useUser";
-import { Container, Title, Text, List, Group, Tooltip } from "@mantine/core";
-import { IconAlertCircle, IconCheck, IconPlus } from "@tabler/icons-react";
+import Image from "@/atoms/image/image";
+import LinkButton from "@/atoms/linkButton/linkButton";
+import HomePageAccordion from "@/organisms/homePageAccordion/homePageAccordion";
+import { Container, Title, Text, Stack } from "@mantine/core";
 
 export default function Home() {
-  const user = useUser();
-
   return (
-    <Container>
-      <Title size="h1" order={1}>
-        Social Games
-      </Title>
-      <Text pt="xs">
-        This site collects and categorizes online social games.
-      </Text>
+    <Container pb="lg">
+      <div className={styles.mainHero}>
+        <Title order={1} className={styles.heroTitle}>
+          Social Games
+        </Title>
+        <Text pt="xs">
+          A dynamic collection of online multiplayer social games.
+          <br />
+          Find a game to play by searching for specific tags or filtering by
+          player count.
+        </Text>
+        <LinkButton size="lg" mt="lg" href="/games">
+          Discover Games
+        </LinkButton>
+      </div>
 
-      <Title size="h2" pt="xl">
-        Looking for a game?
-      </Title>
-      <Text pt="xs">
-        Take a look at the <Anchor href="/games">games</Anchor> section. Enter
-        the desired player count, adjust selected tags and inspect the results.
-      </Text>
+      <div className={styles.secondaryHero}>
+        <Stack gap={0}>
+          <Title order={2} className={styles.secondaryHeroTitle}>
+            Games
+          </Title>
+          <Text pt="xs">
+            Games are easily recognizable through thumbnails. Discovery of new
+            games is made easy thanks to baked in player limits and other
+            attributes and customizable tags. Scroll through the full list or
+            filter it to fit your group&apos;s preferences.
+          </Text>
+          <Text pt="xs">
+            Once a game is found, click the globe icon to leave social games and
+            open the games&apos; website.
+          </Text>
+        </Stack>
 
-      <Title size="h2" pt="xl">
-        Contribute
-      </Title>
-      <Text pt="xs">
-        You can contribute more games and tags to the collection.
-      </Text>
+        <Image src="/games.jpg" width={500} height={300} alt="games" />
+      </div>
 
-      <Group gap="xs" pt="lg">
-        <Title size="h3">Prerequisites</Title>
-        <Tooltip
-          label={`The prerequisites are ${
-            user?.member || user?.admin ? "" : "not "
-          }fulfilled`}
-        >
-          {user?.member || user?.admin ? (
-            <IconCheck height={22} width={22} color="green" />
-          ) : (
-            <IconAlertCircle height={22} width={22} color="red" />
-          )}
-        </Tooltip>
-      </Group>
-      <Text pt="xs">
-        Only logged in users with the <i>member</i> role can contribute.
-        {" " + getMemberRoleText(user)}
-      </Text>
+      <div className={styles.secondaryHero}>
+        <Image
+          src="/tags.jpg"
+          width={500}
+          height={300}
+          alt="tags"
+          className={styles.imgReverseOrderOnSmallViewport}
+        />
 
-      <Title size="h3" pt="lg">
-        Adding a Game
-      </Title>
-      <Text pt="xs">
-        The game you are looking for is not listed here? Contribute to the
-        project by adding a game:
-      </Text>
+        <Stack gap={0}>
+          <Title order={2} className={styles.secondaryHeroTitle}>
+            Tags
+          </Title>
+          <Text pt="xs">
+            Tags represent an attribute that can be mapped to a game. They are
+            used to differentiate games and provide a quick overview over the
+            key features of a game.
+          </Text>
+          <Text pt="xs">
+            Tags consist of a short title, a color to differentiate tags, and a
+            description that is accessible in a tooltip when hovering over tags.
+          </Text>
+        </Stack>
+      </div>
 
-      <List type="ordered" withPadding pt="xs">
-        <List.Item>
-          <Group gap={0}>
-            Click the
-            <IconPlus height={20} width={20} className={styles.icon} />
-            icon in the header and select&nbsp;<i>Add Game</i>
-          </Group>
-        </List.Item>
-        <List.Item>Enter game information and upload a thumbnail</List.Item>
-        <List.Item>
-          Click <i>Save</i>
-        </List.Item>
-      </List>
+      <div className={styles.secondaryHero}>
+        <Stack gap={0}>
+          <Title order={2} className={styles.secondaryHeroTitle}>
+            Contribute
+          </Title>
+          <Text pt="xs">
+            Missing a game in the collection? That&apos;s where you come in! You
+            can contribute more games and tags to the collection. For that, you
+            have to log in and receive the necessary role from an administrator.
+            See prerequisites bellow for more details.
+          </Text>
+        </Stack>
 
-      <Title size="h3" pt="lg">
-        Adding a Tag
-      </Title>
-      <Text pt="xs">
-        Game attributes can be stored using custom tags. When searching for a
-        game, these tags can be utilized as filters and provide useful
-        information at a glance.
-      </Text>
-      <Text>
-        If a game has an attribute that has no fitting tag, you can add your own
-        tags as follows:
-      </Text>
+        <Image src="/game-form.jpg" width={500} height={300} alt="game form" />
+      </div>
 
-      <List type="ordered" withPadding pt="xs">
-        <List.Item>
-          <Group gap={0}>
-            Click the
-            <IconPlus height={20} width={20} className={styles.icon} />
-            icon in the header and select&nbsp;<i>Add Tag</i>
-          </Group>
-        </List.Item>
-        <List.Item>Enter the tag information</List.Item>
-        <List.Item>
-          Click <i>Save</i>
-        </List.Item>
-        <List.Item>Use the tag in a new or existing game</List.Item>
-      </List>
+      <HomePageAccordion />
     </Container>
   );
-}
-
-function getMemberRoleText(user: User | null) {
-  if (user === null) {
-    return "Login to check if you have the member role.";
-  }
-  if (user.member) {
-    return "You already have the member role.";
-  }
-  if (user.admin) {
-    return "You have the admin role, which includes member permissions.";
-  }
-  return "Contact an administrator to receive the role.";
 }
