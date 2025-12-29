@@ -1,6 +1,5 @@
 import "./globals.css";
 import "@mantine/core/styles.css";
-import "@mantine/notifications/styles.css";
 
 import styles from "./layout.module.css";
 import type { Metadata, Viewport } from "next";
@@ -11,7 +10,6 @@ import {
   MantineColorScheme,
   MantineProvider,
 } from "@mantine/core";
-import { Notifications } from "@mantine/notifications";
 import theme from "@/theme";
 import Header from "@/organisms/header/header";
 import Footer from "@/organisms/footer/footer";
@@ -58,7 +56,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <MantineProvider theme={theme} defaultColorScheme={defaultColorScheme}>
           <Analytics />
           <SpeedInsights />
-          <Notifications position="bottom-right" />
           <div className={styles.mainLayout}>
             <Header className={styles.header} />
             <main className={styles.content}>{children}</main>

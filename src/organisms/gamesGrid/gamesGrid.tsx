@@ -1,5 +1,5 @@
 import GameCard from "@/molecules/gameCard/gameCard";
-import Game from "@/types/game";
+import { Game } from "@/data/games";
 import { SimpleGrid } from "@mantine/core";
 import { useCallback } from "react";
 import { Flipper, Flipped } from "react-flip-toolkit";

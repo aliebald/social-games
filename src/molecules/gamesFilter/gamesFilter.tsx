@@ -7,18 +7,16 @@ import {
   NumberInput,
   SimpleGrid,
   Switch,
-  Title,
   Button,
   Divider,
   Box,
-  Space,
 } from "@mantine/core";
 import { useLocalStorage } from "@mantine/hooks";
 import { IconChevronDown } from "@tabler/icons-react";
 import { isEqual, uniqBy } from "lodash";
 import classNames from "classnames";
-import Game from "@/types/game";
-import Tag from "@/types/tag";
+import { Game } from "@/data/games";
+import { Tag } from "@/data/tags";
 import SelectableTagGroup from "../selectableTagGroup/selectableTagGroup";
 import SwitchWithTooltip from "@/atoms/switchWithTooltip/switchWithTooltip";
 
@@ -95,19 +93,6 @@ export default function GamesFilter({
 
   return (
     <Container pb="sm" px={{ base: "0", md: "md" }}>
-      <Group gap="xs">
-        <Title size="h2">Games</Title>
-        <Button
-          disabled={isDefaultFilter}
-          onClick={() => updateFilter(defaultFilter)}
-          className={classNames(styles.resetBtn, {
-            [styles.resetBtnHidden]: !showFilter,
-          })}
-        >
-          Reset Filter
-        </Button>
-      </Group>
-
       <Divider
         variant="dashed"
         onClick={() => setShowFilter(!showFilter)}
@@ -175,7 +160,15 @@ export default function GamesFilter({
           selectedTagIds={filter.excludedTagIds}
           onChange={(excludedTagIds) => updateFilter({ excludedTagIds })}
         />
-        <Space h="xs" />
+        <Button
+          mt="md"
+          mb="lg"
+          disabled={isDefaultFilter}
+          onClick={() => updateFilter(defaultFilter)}
+          className={styles.resetBtn}
+        >
+          Reset Filter
+        </Button>
       </Collapse>
     </Container>
   );

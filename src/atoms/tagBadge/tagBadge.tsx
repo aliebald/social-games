@@ -1,6 +1,6 @@
 "use client";
 
-import Tag from "@/types/tag";
+import { Tag } from "@/data/tags";
 import { Badge, Popover, BadgeProps, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import styles from "./tagBadge.module.css";

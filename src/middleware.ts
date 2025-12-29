@@ -2,10 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const config = {
   /**
-   * Match everything except favicon and api routes.
+   * Match everything except favicon routes.
    * Based on example from {@link https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher NextJs docs}
    */
-  matcher: "/((?!api|favicon.svg).*)",
+  matcher: "/((?!favicon.svg).*)",
 };
 
 export function middleware(req: NextRequest) {

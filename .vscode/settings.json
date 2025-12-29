@@ -17,5 +17,6 @@
   "cssVariables.lookupFiles": [
     "**/*.css",
     "node_modules/@mantine/core/esm/index.css"
-  ]
+  ],
+  "cSpell.words": ["mantine", "tabler"]
 }

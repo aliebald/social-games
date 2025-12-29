@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./gameCard.module.css";
-import Game from "@/types/game";
+import { Game } from "@/data/games";
 import { ActionIcon, Card, Group, Text } from "@mantine/core";
 import { IconWorld } from "@tabler/icons-react";
 import { ForwardedRef, forwardRef, memo } from "react";

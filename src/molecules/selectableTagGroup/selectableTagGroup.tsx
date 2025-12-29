@@ -1,6 +1,6 @@
 import styles from "./selectableTagGroup.module.css";
 import { Anchor, Chip, Group, Skeleton } from "@mantine/core";
-import Tag from "@/types/tag";
+import { Tag } from "@/data/tags";
 import TextWithInfoIconTooltip from "@/atoms/textWithInfoIconTooltip/textWithInfoIconTooltip";
 import { range } from "lodash";
 import { MouseEventHandler } from "react";

@@ -11,7 +11,6 @@ interface ImageProps
   src: MantineImageProps["src"];
 }
 
-/** Image for use with images not fetched from firebase */
 export default function Image(props: ImageProps) {
   return <MantineImage component={NextImage} {...props} />;
 }

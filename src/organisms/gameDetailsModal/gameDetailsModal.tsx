@@ -1,43 +1,25 @@
 "use client";
 
 import styles from "./gameDetailsModal.module.css";
-import Game from "@/types/game";
-import { Group, Modal, Text, Title, Flex, Divider } from "@mantine/core";
-import { IconWorld, IconPencil, IconTrash } from "@tabler/icons-react";
+import { Game } from "@/data/games";
+import { Group, Modal, Text, Title, Divider } from "@mantine/core";
+import { IconWorld } from "@tabler/icons-react";
 import LinkIconWithTooltip from "@/molecules/linkIconWithTooltip/linkIconWithTooltip";
 import PlayerCount from "@/atoms/playerCount/playerCount";
 import Tags from "@/molecules/tags/tags";
 import GameImageWithFallback from "@/atoms/gameImageWithFallback/gameImageWithFallback";
-import ActionIconWithTooltip from "@/molecules/actionIconWithTooltip/actionIconWithTooltip";
-import deleteGame from "@/networking/deleteGame";
 
 interface GameDetailsModalProps {
   game: Game;
-  canEdit: boolean;
   open: boolean;
   onClose: () => void;
 }
 
 export default function GameDetailsModal({
   game,
-  canEdit,
   open,
   onClose,
 }: GameDetailsModalProps) {
-  const handleDeleteGame = async (game: Game) => {
-    if (
-      !window.confirm(
-        `Do you really want to delete ${game.title}? This cannot be undone.`
-      )
-    ) {
-      return;
-    }
-
-    if (await deleteGame(game)) {
-      onClose();
-    }
-  };
-
   return (
     <Modal.Root
       opened={open && game !== null}
@@ -50,33 +32,17 @@ export default function GameDetailsModal({
         <Modal.CloseButton className={styles.closeBtn} variant="outlined" />
         <GameImageWithFallback game={game} height={200} />
         <Modal.Body pt="md">
-          <Flex justify="space-between" gap="xs" wrap="wrap">
+          <Group justify="space-between" gap="xs" wrap="wrap">
             <Title size="h1" order={3} fw={500}>
               {game.title}
             </Title>
-            <Group gap="xs">
-              {canEdit && (
-                <ActionIconWithTooltip
-                  tooltip={`Delete ${game.title}`}
-                  onClick={() => handleDeleteGame(game)}
-                  Icon={IconTrash}
-                />
-              )}
-              {canEdit && (
-                <LinkIconWithTooltip
-                  href={`/games/edit/${game.id}`}
-                  tooltip={`Edit ${game.title}`}
-                  Icon={IconPencil}
-                />
-              )}
-              <LinkIconWithTooltip
-                href={game.websiteUrl}
-                tooltip={`Go to ${game.title}`}
-                Icon={IconWorld}
-                openInNewTab
-              />
-            </Group>
-          </Flex>
+            <LinkIconWithTooltip
+              href={game.websiteUrl}
+              tooltip={`Go to ${game.title}`}
+              Icon={IconWorld}
+              openInNewTab
+            />
+          </Group>
           <PlayerCount
             minPlayers={game.minPlayers}
             maxPlayers={game.maxPlayers}
@@ -84,9 +50,6 @@ export default function GameDetailsModal({
           <Tags tags={game.tags} pt={game.tags.length > 0 ? "sm" : undefined} />
           <Divider mt="sm" mb="md" color="dark.4" />
           <Text>{game.description}</Text>
-          <Text fz="sm" pt="md" c="dimmed">
-            Author: {game.authorName}
-          </Text>
         </Modal.Body>
       </Modal.Content>
     </Modal.Root>

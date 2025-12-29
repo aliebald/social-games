@@ -1,7 +1,7 @@
 .mainLayout {
   min-height: 100%;
   display: grid;
-  grid-template-rows: rem(56px) auto var(--footer-height);
+  grid-template-rows: auto 1fr var(--footer-height);
   grid-template-areas:
     "header"
     "main-content"
@@ -15,8 +15,8 @@
 .content {
   overflow: hidden;
   grid-area: main-content;
-  padding-top: var(--mantine-spacing-md);
-  padding-bottom: var(--mantine-spacing-md);
+  padding-top: var(--mantine-spacing-lg);
+  padding-bottom: var(--mantine-spacing-lg);
 }
 
 .footer {

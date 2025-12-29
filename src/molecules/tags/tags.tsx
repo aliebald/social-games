@@ -1,5 +1,5 @@
 import TagBadge from "@/atoms/tagBadge/tagBadge";
-import Tag from "@/types/tag";
+import { Tag } from "@/data/tags";
 import { Flex, BoxProps, BadgeProps } from "@mantine/core";
 
 interface TagsProps extends BoxProps {
