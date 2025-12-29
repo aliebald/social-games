@@ -20,17 +20,15 @@
     "@vercel/analytics": "^1.1.1",
     "@vercel/speed-insights": "^1.0.1",
     "classnames": "^2.5.1",
-    "jszip": "^3.10.1",
     "lodash": "^4.17.21",
     "next": "14.2.35",
     "react": "^18",
     "react-dom": "^18",
-    "react-flip-toolkit": "^7.1.0",
-    "swr": "^2.2.5"
+    "react-flip-toolkit": "^7.1.0"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.202",
-    "@types/node": "^20",
+    "@types/lodash": "^4.17.21",
+    "@types/node": "^25.0.3",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@typescript-eslint/eslint-plugin": "^6.13.1",
@@ -39,7 +37,7 @@
     "postcss": "^8.4.31",
     "postcss-preset-mantine": "^1.11.0",
     "postcss-simple-vars": "^7.0.1",
-    "prettier": "^3.1.0",
-    "typescript": "^5"
+    "prettier": "^3.7.4",
+    "typescript": "^5.9.3"
   }
 }
