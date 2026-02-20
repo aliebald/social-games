@@ -8,6 +8,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import {
   ColorSchemeScript,
   MantineColorScheme,
+  mantineHtmlProps,
   MantineProvider,
 } from "@mantine/core";
 import theme from "@/theme";
@@ -47,7 +48,7 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
+    <html lang="en" {...mantineHtmlProps}>
       <head>
         <ColorSchemeScript defaultColorScheme={defaultColorScheme} />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

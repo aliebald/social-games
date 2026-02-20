@@ -1,11 +1,11 @@
 import { ActionIcon, MantineSize, Tooltip } from "@mantine/core";
-import { TablerIconsProps } from "@tabler/icons-react";
+import { IconProps } from "@tabler/icons-react";
 import { FC, MouseEventHandler } from "react";
 
 export interface ActionIconWithTooltip {
   tooltip: string;
   size?: MantineSize;
-  Icon: FC<TablerIconsProps>;
+  Icon: FC<IconProps>;
   onClick: (() => void) | (() => Promise<void>);
 }
 

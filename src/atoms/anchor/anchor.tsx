@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import {
   Anchor as MantineAnchor,
@@ -6,8 +8,7 @@ import {
 } from "@mantine/core";
 
 interface AnchorProps
-  extends MantineAnchorProps,
-    ElementProps<"a", keyof MantineAnchorProps> {
+  extends MantineAnchorProps, ElementProps<"a", keyof MantineAnchorProps> {
   href: string;
   openInNewTab?: boolean;
 }

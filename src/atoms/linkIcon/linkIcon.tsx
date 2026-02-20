@@ -1,12 +1,12 @@
 import { ActionIcon, ActionIconProps, MantineSize } from "@mantine/core";
-import { TablerIconsProps } from "@tabler/icons-react";
+import { IconProps } from "@tabler/icons-react";
 import Link from "next/link";
 import { FC, ForwardedRef, forwardRef } from "react";
 
 export interface LinkIconProps extends Pick<ActionIconProps, "variant"> {
   href: string;
   openInNewTab?: boolean;
-  Icon: FC<TablerIconsProps>;
+  Icon: FC<IconProps>;
   size?: MantineSize;
 }
 

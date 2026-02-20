@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  publicRuntimeConfig: {
-    lastModifiedYear: new Date().getFullYear(),
+  env: {
+    LAST_MODIFIED_YEAR: new Date().getFullYear().toString(),
   },
   experimental: {
     optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
