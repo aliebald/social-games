@@ -8,7 +8,7 @@ export const config = {
   matcher: "/((?!favicon.svg).*)",
 };
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const basicAuth = req.headers.get("authorization");
   const url = req.nextUrl;
 
